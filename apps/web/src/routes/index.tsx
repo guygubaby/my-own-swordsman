@@ -3,6 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router"
 import {
   ArrowRight,
   Gamepad2,
+  History,
   MessagesSquare,
   ShoppingBag,
   Sparkles,
@@ -11,6 +12,8 @@ import {
 import { PaperCard, SectionTitle, Seal } from "@/components/site-chrome"
 import { dailyPair } from "@/data/chain-pairs"
 import { cleanLine, episodes } from "@/data/episodes"
+import { formatTime } from "@/lib/danmaku"
+import { lastWatched } from "@/lib/watch-progress"
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -66,6 +69,7 @@ function HomePage() {
   const [episode, setEpisode] = useState(
     () => episodes[Math.floor(Math.random() * episodes.length)],
   )
+  const [resume] = useState(() => lastWatched())
   const pair = dailyPair()
 
   function rollEpisode() {
@@ -139,6 +143,29 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {resume ? (
+        <section className="paper-panel flex flex-wrap items-center gap-4 rounded-lg px-4 py-4 md:px-5">
+          <span className="grid size-10 shrink-0 place-items-center rounded-md bg-cinnabar/10 text-cinnabar">
+            <History className="size-4.5" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] tracking-[0.2em] text-ink-soft">接着上次看</div>
+            <div className="mt-0.5 truncate font-heading text-base font-bold text-ink">
+              第 {resume.episode} 回 · {resume.title}
+            </div>
+            <div className="mt-0.5 text-xs text-ink-soft">上次看到 {formatTime(resume.time)}</div>
+          </div>
+          <Link
+            to="/watch/$episode"
+            params={{ episode: String(resume.episode) }}
+            className="inline-flex items-center gap-1 rounded-md bg-cinnabar px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep"
+          >
+            继续看
+            <ArrowRight className="size-4" />
+          </Link>
+        </section>
+      ) : null}
 
       <section>
         <SectionTitle

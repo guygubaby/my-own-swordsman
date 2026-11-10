@@ -8,9 +8,10 @@ import artplayerPluginDanmuku, {
   type Mode,
   type Result as DanmakuPluginResult,
 } from "artplayer-plugin-danmuku"
-import { List } from "lucide-react"
+import { History, List } from "lucide-react"
 import { api } from "@/lib/api"
-import type { Danmaku, DanmakuMode } from "@/lib/danmaku"
+import { formatTime, type Danmaku, type DanmakuMode } from "@/lib/danmaku"
+import { clearProgress, getProgress, saveProgress } from "@/lib/watch-progress"
 import type { PlayableSource, VideoSource } from "@/data/video-sources"
 import { DanmakuComposer } from "./danmaku-composer"
 import { SourcePicker } from "./source-picker"
@@ -82,6 +83,8 @@ export function EpisodePlayer({
   const hlsRef = useRef<HlsJs | null>(null)
   const loadedUrlRef = useRef<string | null>(null)
   const [playerKey, setPlayerKey] = useState(0)
+  const [resume, setResume] = useState(() => getProgress(episode))
+  const lastSavedSlotRef = useRef(-1)
 
   const danmakuQuery = useQuery({
     queryKey: ["danmaku", episode],
@@ -203,10 +206,19 @@ export function EpisodePlayer({
 
     artRef.current = art
     loadedUrlRef.current = videoUrl
-    const timer = window.setInterval(() => setCurrentTime(art.currentTime), 500)
+    const timer = window.setInterval(() => {
+      const time = art.currentTime
+      setCurrentTime(time)
+      const slot = Math.floor(time / 5)
+      if (slot !== lastSavedSlotRef.current) {
+        lastSavedSlotRef.current = slot
+        saveProgress({ episode, time, duration: art.duration || 0, updatedAt: Date.now() })
+      }
+    }, 500)
 
     return () => {
       window.clearInterval(timer)
+      saveProgress({ episode, time: art.currentTime, duration: art.duration || 0, updatedAt: Date.now() })
       if (hlsRef.current) {
         hlsRef.current.destroy()
         hlsRef.current = null
@@ -276,6 +288,28 @@ export function EpisodePlayer({
     void art.play()
   }
 
+  function resumePlayback() {
+    const art = artRef.current
+    if (!art || !resume) return
+    art.currentTime = resume.time
+    setResume(null)
+    void art.play()
+  }
+
+  function restartPlayback() {
+    clearProgress(episode)
+    setResume(null)
+    const art = artRef.current
+    if (!art) return
+    art.currentTime = 0
+    void art.play()
+  }
+
+  // 已经播起来了就把「上次看到」的提示收掉，别一直挂着。
+  useEffect(() => {
+    if (currentTime > 5) setResume(null)
+  }, [currentTime])
+
   return (
     <div>
       <div className="overflow-hidden rounded-xl border border-white/10 bg-[#17110b] text-white shadow-xl">
@@ -299,6 +333,27 @@ export function EpisodePlayer({
             />
           </div>
         </div>
+
+        {resume ? (
+          <div className="flex flex-wrap items-center gap-2 border-b border-white/10 bg-gold/5 px-3 py-2 text-[11px] text-white/70">
+            <History className="size-3.5 text-gold" />
+            <span>上次看到 {formatTime(resume.time)}</span>
+            <button
+              type="button"
+              onClick={resumePlayback}
+              className="rounded border border-gold/40 px-2 py-0.5 text-gold transition-colors hover:bg-gold/10"
+            >
+              继续播放
+            </button>
+            <button
+              type="button"
+              onClick={restartPlayback}
+              className="rounded px-2 py-0.5 text-white/50 transition-colors hover:text-white/80"
+            >
+              从头看
+            </button>
+          </div>
+        ) : null}
 
         <div className="relative aspect-video w-full bg-black">
           <div ref={containerRef} className="h-full w-full" />
