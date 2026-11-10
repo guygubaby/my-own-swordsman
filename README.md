@@ -20,7 +20,7 @@
 - 授权片源填到 `apps/web/src/data/video-sources.ts`，按回目覆盖演示片源；没有授权的剧集地址不要放。
 - 弹幕存 D1 的 `danmaku` 表；发送需要游客登录，服务端有 2 秒冷却和 40 字上限。
 - 站内不内置抓流/盗链；正片入口仍走爱奇艺 / 央视网 / 央视频。
-- 注意：Workers Static Assets 不支持 Range，演示视频在客户端整文件 blob 加载以保证可 seek；正式长片源请放到支持 Range 的 R2 / Stream / 外部 CDN。片源调研见 [SOURCES.md](SOURCES.md)。
+- 注意：Workers Static Assets 不支持 Range，演示视频在客户端整文件 blob 加载以保证可 seek；正式长片源请放到支持 Range 的 R2 / Stream / 外部 CDN。
 
 ## 本地运行
 
