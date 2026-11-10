@@ -13,7 +13,8 @@
     "test": "vitest run",
     "db:generate": "drizzle-kit generate",
     "db:migrate:local": "cf d1 migrations apply 33c17fba-0b19-4a10-8f6b-2142af118738 --local --dir ./drizzle --persist-to ./.cloudflare/state",
-    "db:migrate:remote": "cf d1 migrations apply 33c17fba-0b19-4a10-8f6b-2142af118738 --dir ./drizzle"
+    "db:migrate:remote": "cf d1 migrations apply 33c17fba-0b19-4a10-8f6b-2142af118738 --dir ./drizzle",
+    "ext:zip": "cd ../extension && rm -f ../web/public/tongfu-danmaku-extension.zip && zip -qr ../web/public/tongfu-danmaku-extension.zip . -x '*.DS_Store'"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

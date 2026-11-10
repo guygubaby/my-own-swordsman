@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { Link, createFileRoute } from "@tanstack/react-router"
-import { Check, Copy, Loader2, Puzzle } from "lucide-react"
+import { Check, Copy, Download, Loader2, Puzzle } from "lucide-react"
 import { api } from "@/lib/api"
 import { authClient } from "@/lib/auth-client"
 import { signInGuest } from "@/lib/guest"
@@ -126,7 +126,18 @@ function ConnectExtensionPage() {
           </p>
           <p className="mt-1">
             插件只在央视网《武林外传》页面注入弹幕层，不改动视频流、不影响登录。
-            安装包在仓库 <code>apps/extension</code>，用 Chrome「加载已解压的扩展程序」导入即可。
+          </p>
+          <a
+            href="/tongfu-danmaku-extension.zip"
+            download
+            className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-cinnabar px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-cinnabar/90"
+          >
+            <Download className="size-3.5" />
+            下载插件（zip）
+          </a>
+          <p className="mt-2">
+            解压后打开 <code>chrome://extensions</code>，开启右上角「开发者模式」，
+            点「加载已解压的扩展程序」，选解压出来的文件夹。
           </p>
         </div>
       </div>
