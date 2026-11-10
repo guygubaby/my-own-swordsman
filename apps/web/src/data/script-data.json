@@ -1,0 +1,1839 @@
+{
+ "episodes": [
+  {
+   "n": 1,
+   "title": "郭女侠怒砸同福店 佟掌柜妙点迷路人",
+   "titleA": "郭女侠怒砸同福店 佟掌柜妙点迷路人",
+   "titleB": "",
+   "quoteCount": 535,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "是我们佟掌柜的小姑子，换句话说我们佟掌柜是她嫂子"
+   }
+  },
+  {
+   "n": 2,
+   "title": "掌柜的慰问装病者 跑堂人收拾寻衅女",
+   "titleA": "掌柜的慰问装病者 跑堂人收拾寻衅女",
+   "titleB": "",
+   "quoteCount": 488,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "排山倒海！白展堂你完蛋啦"
+   }
+  },
+  {
+   "n": 3,
+   "title": "众伙计沦为小跟班 莫小贝建起八大派",
+   "titleA": "众伙计沦为小跟班 莫小贝建起八大派",
+   "titleB": "",
+   "quoteCount": 524,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "那就由我来，葵花点穴——笑脸相迎之。呵呵，莫掌门回来啦"
+   }
+  },
+  {
+   "n": 4,
+   "title": "李厨子智斗瞎老娘 白盗圣惨遇赌大王",
+   "titleA": "李厨子智斗瞎老娘 白盗圣惨遇赌大王",
+   "titleB": "",
+   "quoteCount": 435,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "白展堂！把小贝的糖人还她"
+   }
+  },
+  {
+   "n": 5,
+   "title": "展红绫千里定扒手 郭芙蓉一心迷盗圣",
+   "titleA": "展红绫千里定扒手 郭芙蓉一心迷盗圣",
+   "titleB": "",
+   "quoteCount": 391,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "闭嘴，大嘴。我真的退出江湖了，我白展堂对天发誓"
+   }
+  },
+  {
+   "n": 6,
+   "title": "杨蕙兰比武招郎君 李大嘴施招毙煞神",
+   "titleA": "杨蕙兰比武招郎君 李大嘴施招毙煞神",
+   "titleB": "",
+   "quoteCount": 402,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "来了来了！面来了，热腾腾香喷喷的青菜肉丝面。大嘴"
+   }
+  },
+  {
+   "n": 7,
+   "title": "讨银钱秀才苦费心 泻私愤芙蓉恶作剧",
+   "titleA": "讨银钱秀才苦费心 泻私愤芙蓉恶作剧",
+   "titleB": "",
+   "quoteCount": 451,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "你不要逼我，排山倒海"
+   }
+  },
+  {
+   "n": 8,
+   "title": "七侠古镇寡妇寻夫 尚儒客栈众人聚首",
+   "titleA": "七侠古镇寡妇寻夫 尚儒客栈众人聚首",
+   "titleB": "",
+   "quoteCount": 487,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手！兄弟，对不住了。我实在是狠不下这心。一个个来吧~~"
+   }
+  },
+  {
+   "n": 9,
+   "title": "佟湘玉煞费良苦心 莫小贝梦游影视城",
+   "titleA": "佟湘玉煞费良苦心 莫小贝梦游影视城",
+   "titleB": "",
+   "quoteCount": 353,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "哎呀！没事儿的小贝，你随便说啊，姐姐已经退出江湖了，呵呵，我去帮大嘴啊"
+   }
+  },
+  {
+   "n": 10,
+   "title": "壮怂胆捕头喝烈酒 施恩惠秀才偷剩菜",
+   "titleA": "壮怂胆捕头喝烈酒 施恩惠秀才偷剩菜",
+   "titleB": "",
+   "quoteCount": 395,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手！有人，打"
+   }
+  },
+  {
+   "n": 11,
+   "title": "扈十娘撒娇勾展堂 赛貂蝉耍赖讹湘玉",
+   "titleA": "扈十娘撒娇勾展堂 赛貂蝉耍赖讹湘玉",
+   "titleB": "",
+   "quoteCount": 284,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "展堂，快去左家庄。买条上好的紫檀香，快去"
+   }
+  },
+  {
+   "n": 12,
+   "title": "受委曲伙计装叛变 求生意老板充大方",
+   "titleA": "受委曲伙计装叛变 求生意老板充大方",
+   "titleB": "",
+   "quoteCount": 427,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "秀才，拿银子来，秀才……小郭拿出来"
+   }
+  },
+  {
+   "n": 13,
+   "title": "争自尊大嘴扮文豪 解危难湘玉设大赛",
+   "titleA": "争自尊大嘴扮文豪 解危难湘玉设大赛",
+   "titleB": "",
+   "quoteCount": 413,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "缺啥再来啊。展堂，展堂，走额带你接骨头去。秀才拿银子去"
+   }
+  },
+  {
+   "n": 14,
+   "title": "邢捕头勇破杀鸡案 燕小六力推防贼法",
+   "titleA": "邢捕头勇破杀鸡案 燕小六力推防贼法",
+   "titleB": "",
+   "quoteCount": 525,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "掌柜的，你就拿着吧，能不能借我几两银子当盘缠"
+   }
+  },
+  {
+   "n": 15,
+   "title": "雷老五潜入县衙门 佟掌柜钻进牛角尖",
+   "titleA": "雷老五潜入县衙门 佟掌柜钻进牛角尖",
+   "titleB": "",
+   "quoteCount": 447,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "不值什么钱，如果要没有盗圣两个字，最多也就值个三五两银子"
+   }
+  },
+  {
+   "n": 16,
+   "title": "为骗财书商耍手段 欲销赃掌柜吓破胆",
+   "titleA": "为骗财书商耍手段 欲销赃掌柜吓破胆",
+   "titleB": "",
+   "quoteCount": 441,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "欺人太甚了你！排山倒海"
+   }
+  },
+  {
+   "n": 17,
+   "title": "莫小贝初掌衡山派 钱夫人再闹同福店",
+   "titleA": "莫小贝初掌衡山派 钱夫人再闹同福店",
+   "titleB": "",
+   "quoteCount": 343,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "三就是，排山倒海"
+   }
+  },
+  {
+   "n": 18,
+   "title": "燕小六酒醉乱抓人 郭芙蓉心痴错定情",
+   "titleA": "燕小六酒醉乱抓人 郭芙蓉心痴错定情",
+   "titleB": "",
+   "quoteCount": 549,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 19,
+   "title": "李大嘴苦练降龙掌 郭芙蓉难逃生死劫",
+   "titleA": "李大嘴苦练降龙掌 郭芙蓉难逃生死劫",
+   "titleB": "",
+   "quoteCount": 518,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 20,
+   "title": "泼皮侯三搅和客栈 女侠芙蓉操办过年",
+   "titleA": "泼皮侯三搅和客栈 女侠芙蓉操办过年",
+   "titleB": "",
+   "quoteCount": 453,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "我欠掌柜的一顿饺子，也欠大家一个新年，明天一天我全部还上"
+   }
+  },
+  {
+   "n": 21,
+   "title": "寻短见老吴见魔女 赌怨气小郭教武功",
+   "titleA": "寻短见老吴见魔女 赌怨气小郭教武功",
+   "titleB": "",
+   "quoteCount": 463,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "闪开！排山倒海~"
+   }
+  },
+  {
+   "n": 22,
+   "title": "佟掌柜喜获榴莲果 江小道怒打无辜郎",
+   "titleA": "佟掌柜喜获榴莲果 江小道怒打无辜郎",
+   "titleB": "",
+   "quoteCount": 488,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手！小子，跟我玩"
+   }
+  },
+  {
+   "n": 23,
+   "title": "买私盐厨子遭盘查 换身份贼头变捕快",
+   "titleA": "买私盐厨子遭盘查 换身份贼头变捕快",
+   "titleB": "",
+   "quoteCount": 492,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "哈！排山~再倒海"
+   }
+  },
+  {
+   "n": 24,
+   "title": "算命人作法被识破 郭芙蓉洗面遭毁容",
+   "titleA": "算命人作法被识破 郭芙蓉洗面遭毁容",
+   "titleB": "",
+   "quoteCount": 449,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "怎么的？嘿嘿，排山倒海"
+   }
+  },
+  {
+   "n": 25,
+   "title": "佟老爹怒嫁不孝女 白展堂误娶无情人",
+   "titleA": "佟老爹怒嫁不孝女 白展堂误娶无情人",
+   "titleB": "",
+   "quoteCount": 417,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 26,
+   "title": "求休书小郭盼断肠 思佳人秀才伤透心",
+   "titleA": "求休书小郭盼断肠 思佳人秀才伤透心",
+   "titleB": "",
+   "quoteCount": 530,
+   "sample": {
+    "speaker": "吕秀才",
+    "text": "我不是说掌柜的，是郭芙蓉。他们欺负我，而她呢？她„"
+   }
+  },
+  {
+   "n": 27,
+   "title": "入丐帮老邢丢公职 升捕头小六打官腔",
+   "titleA": "入丐帮老邢丢公职 升捕头小六打官腔",
+   "titleB": "",
+   "quoteCount": 498,
+   "sample": {
+    "speaker": "燕小六",
+    "text": "帮我照顾好我七舅姥爷！——秀才，能不能教我也背背"
+   }
+  },
+  {
+   "n": 28,
+   "title": "钱夫人贪财生毒计 莫小贝雪耻怒报官",
+   "titleA": "钱夫人贪财生毒计 莫小贝雪耻怒报官",
+   "titleB": "",
+   "quoteCount": 323,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "不要再吃了，去把大门打开。秀才，大嘴，开门做生意了"
+   }
+  },
+  {
+   "n": 29,
+   "title": "吕圣人智斗姬无命 佟掌柜火拼展红绫",
+   "titleA": "吕圣人智斗姬无命 佟掌柜火拼展红绫",
+   "titleB": "",
+   "quoteCount": 456,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "小贝，不要再写了，去通知一下秀才他们，快点儿，快点儿"
+   }
+  },
+  {
+   "n": 30,
+   "title": "佟石头离乡闯江湖 郭芙蓉回家探父母",
+   "titleA": "佟石头离乡闯江湖 郭芙蓉回家探父母",
+   "titleB": "",
+   "quoteCount": 428,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "郭芙蓉，你告诉我，当初闯荡江湖是为了啥"
+   }
+  },
+  {
+   "n": 31,
+   "title": "痴秀才思念郭芙蓉 醋掌柜刁难祝无双",
+   "titleA": "痴秀才思念郭芙蓉 醋掌柜刁难祝无双",
+   "titleB": "",
+   "quoteCount": 453,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "放着我来，葵花点穴手"
+   }
+  },
+  {
+   "n": 32,
+   "title": "拼厨艺大嘴成碎催 遇良材诸葛传衣钵",
+   "titleA": "拼厨艺大嘴成碎催 遇良材诸葛传衣钵",
+   "titleB": "",
+   "quoteCount": 348,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手！——他要干啥"
+   }
+  },
+  {
+   "n": 33,
+   "title": "西域客欲擒关中侠 涉奇险盗圣救人质",
+   "titleA": "西域客欲擒关中侠 涉奇险盗圣救人质",
+   "titleB": "",
+   "quoteCount": 494,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手！姑娘保重，后会有期"
+   }
+  },
+  {
+   "n": 34,
+   "title": "受邀请小贝赴衡山 为情困秀才抱错人",
+   "titleA": "受邀请小贝赴衡山 为情困秀才抱错人",
+   "titleB": "",
+   "quoteCount": 420,
+   "sample": {
+    "speaker": "莫小贝",
+    "text": "哎呀，你就别絮叨了！许你当掌柜就不许我当掌门啊"
+   }
+  },
+  {
+   "n": 35,
+   "title": "小魔女执意做红娘 佟湘玉一心修剑谱",
+   "titleA": "小魔女执意做红娘 佟湘玉一心修剑谱",
+   "titleB": "",
+   "quoteCount": 417,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "无双，葵花点穴手"
+   }
+  },
+  {
+   "n": 36,
+   "title": "遇追风盗圣吓破胆 见芙蓉秀才惊断魂",
+   "titleA": "遇追风盗圣吓破胆 见芙蓉秀才惊断魂",
+   "titleB": "",
+   "quoteCount": 420,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "都给我闪开！闪开！排山倒海"
+   }
+  },
+  {
+   "n": 37,
+   "title": "心不甘小郭拼才艺 情不愿无双走天涯",
+   "titleA": "心不甘小郭拼才艺 情不愿无双走天涯",
+   "titleB": "",
+   "quoteCount": 358,
+   "sample": {
+    "speaker": "莫小贝",
+    "text": "嫂子，我能帮你洗衣服拉！鸟牌皂角粉，洗出一代好掌门"
+   }
+  },
+  {
+   "n": 38,
+   "title": "迎挑战小贝当掌柜 出狠招湘玉赢赌局",
+   "titleA": "迎挑战小贝当掌柜 出狠招湘玉赢赌局",
+   "titleB": "",
+   "quoteCount": 417,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "梦里见包？怪不得小贝头上撞了个大包。小贝，嫂子对不起你"
+   }
+  },
+  {
+   "n": 39,
+   "title": "吕秀才得理不饶人 郭芙蓉自食苦月饼",
+   "titleA": "吕秀才得理不饶人 郭芙蓉自食苦月饼",
+   "titleB": "",
+   "quoteCount": 390,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "你该干嘛干嘛去，啊！哎呀这是给秀才的，小贝乖啊，姐姐回头给你做一次啊"
+   }
+  },
+  {
+   "n": 40,
+   "title": "庆中秋好梦一日游 历磨难客栈重聚首",
+   "titleA": "庆中秋好梦一日游 历磨难客栈重聚首",
+   "titleB": "",
+   "quoteCount": 484,
+   "sample": {
+    "speaker": "燕小六",
+    "text": "捕快娶亲，衙门给补贴三十两银子"
+   }
+  },
+  {
+   "n": 41,
+   "title": "痴情汉重逢梦中人 糊涂女初识菜刀门",
+   "titleA": "痴情汉重逢梦中人 糊涂女初识菜刀门",
+   "titleB": "",
+   "quoteCount": 412,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "那完全不是一码事儿，展堂又没有害人，再说他已经退隐江湖了"
+   }
+  },
+  {
+   "n": 42,
+   "title": "燕小六大摆迷魂阵 千面人关底显真身",
+   "titleA": "燕小六大摆迷魂阵 千面人关底显真身",
+   "titleB": "",
+   "quoteCount": 510,
+   "sample": {
+    "speaker": "真白展堂",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 43,
+   "title": "恶婆婆率众闹洞房 善媳妇受虐一身伤",
+   "titleA": "恶婆婆率众闹洞房 善媳妇受虐一身伤",
+   "titleB": "",
+   "quoteCount": 328,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "行了行了，别嚎了，秀才，去把大嘴叫起来"
+   }
+  },
+  {
+   "n": 44,
+   "title": "吕秀才误收嗜血徒 白展堂临终吐心声",
+   "titleA": "吕秀才误收嗜血徒 白展堂临终吐心声",
+   "titleB": "",
+   "quoteCount": 245,
+   "sample": {
+    "speaker": "吕秀才",
+    "text": "那我跟你拼了！排山倒海"
+   }
+  },
+  {
+   "n": 45,
+   "title": "通缉犯转眼成病患 阶下囚洗心重做人",
+   "titleA": "通缉犯转眼成病患 阶下囚洗心重做人",
+   "titleB": "",
+   "quoteCount": 523,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "哎呀，展堂要是秀才就好了"
+   }
+  },
+  {
+   "n": 46,
+   "title": "神秘客夜访七侠镇 莫掌门血战灯市街",
+   "titleA": "神秘客夜访七侠镇 莫掌门血战灯市街",
+   "titleB": "",
+   "quoteCount": 396,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "小贝啊，不得了了，三大派掌门全部歇菜了！江湖上已经炸锅了"
+   }
+  },
+  {
+   "n": 47,
+   "title": "小姐妹重逢暗叫劲 老夫妻患难见真情",
+   "titleA": "小姐妹重逢暗叫劲 老夫妻患难见真情",
+   "titleB": "",
+   "quoteCount": 375,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "没有问题，只要你能帮嫂子报这一箭之仇，饿给你涨到二钱银子"
+   }
+  },
+  {
+   "n": 48,
+   "title": "败家女随口开条件 穷哥俩合伙办武馆",
+   "titleA": "败家女随口开条件 穷哥俩合伙办武馆",
+   "titleB": "",
+   "quoteCount": 534,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "展堂，你听我说，不是我要相亲，那是给小贝安排的呀"
+   }
+  },
+  {
+   "n": 49,
+   "title": "慕容嫣专访莫掌门 吕秀才定义真侠士",
+   "titleA": "慕容嫣专访莫掌门 吕秀才定义真侠士",
+   "titleB": "",
+   "quoteCount": 358,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "这都多少天了？秀才那二十五两银子，他又没下文了"
+   }
+  },
+  {
+   "n": 50,
+   "title": "邢捕头变身小杂役 燕小六临别显真情",
+   "titleA": "邢捕头变身小杂役 燕小六临别显真情",
+   "titleB": "",
+   "quoteCount": 464,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手！小贝，说"
+   }
+  },
+  {
+   "n": 51,
+   "title": "采花贼意外现真身 虎外甥做媒为报恩",
+   "titleA": "采花贼意外现真身 虎外甥做媒为报恩",
+   "titleB": "",
+   "quoteCount": 495,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "哎哎，那是秀才，跟展堂没有啥关系"
+   }
+  },
+  {
+   "n": 52,
+   "title": "佟石头初尝爱滋味 祝无双投身六扇门",
+   "titleA": "佟石头初尝爱滋味 祝无双投身六扇门",
+   "titleB": "",
+   "quoteCount": 369,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "江湖之大，处处都是家。掌柜的，保重啊"
+   }
+  },
+  {
+   "n": 53,
+   "title": "燕捕头研发绝密令 包侍郎得理不饶人",
+   "titleA": "燕捕头研发绝密令 包侍郎得理不饶人",
+   "titleB": "",
+   "quoteCount": 294,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 54,
+   "title": "苦刑犯逃离同福店 黑衣人解救倒霉蛋",
+   "titleA": "苦刑犯逃离同福店 黑衣人解救倒霉蛋",
+   "titleB": "",
+   "quoteCount": 275,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "这位是衡山派的莫小贝莫掌门"
+   }
+  },
+  {
+   "n": 55,
+   "title": "佟掌柜沦为十六姨 包大仁欢度洞房夜",
+   "titleA": "佟掌柜沦为十六姨 包大仁欢度洞房夜",
+   "titleB": "",
+   "quoteCount": 243,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "葵花点穴手！师兄，对不起啊，我这也是关键时刻"
+   }
+  },
+  {
+   "n": 56,
+   "title": "展侍卫私放真刺客 祝无双泪别假卧底",
+   "titleA": "展侍卫私放真刺客 祝无双泪别假卧底",
+   "titleB": "",
+   "quoteCount": 206,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 57,
+   "title": "李大嘴装疯孵鸡蛋 佟掌柜设宴套难题",
+   "titleA": "李大嘴装疯孵鸡蛋 佟掌柜设宴套难题",
+   "titleB": "",
+   "quoteCount": 440,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "秀才，赶紧到各家里收银子去"
+   }
+  },
+  {
+   "n": 58,
+   "title": "小师妹现身七侠镇 大师姐难解心头愤",
+   "titleA": "小师妹现身七侠镇 大师姐难解心头愤",
+   "titleB": "",
+   "quoteCount": 402,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手！没完没了了你还"
+   }
+  },
+  {
+   "n": 59,
+   "title": "佟掌柜魂归小西天 睡美人变身火凤凰",
+   "titleA": "佟掌柜魂归小西天 睡美人变身火凤凰",
+   "titleB": "",
+   "quoteCount": 425,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 60,
+   "title": "李大嘴入室成劫匪 佟湘玉狠心弃情郎",
+   "titleA": "李大嘴入室成劫匪 佟湘玉狠心弃情郎",
+   "titleB": "",
+   "quoteCount": 368,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "大嘴呢，还有我师兄，还有秀才呢"
+   }
+  },
+  {
+   "n": 61,
+   "title": "前女友盘查私房钱 局外人识错苦肉计",
+   "titleA": "前女友盘查私房钱 局外人识错苦肉计",
+   "titleB": "",
+   "quoteCount": 392,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "展堂，我错了，你要是听得见，就快回来吧！不要劝了，我哭一会儿"
+   }
+  },
+  {
+   "n": 62,
+   "title": "旧爱已成如烟往事 新欢直面惨淡人生",
+   "titleA": "旧爱已成如烟往事 新欢直面惨淡人生",
+   "titleB": "",
+   "quoteCount": 322,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "小贝你让他走！出了事儿就逃，真不愧是传说中的盗圣哈"
+   }
+  },
+  {
+   "n": 63,
+   "title": "白展堂重回老地方 佟湘玉折磨新跑堂",
+   "titleA": "白展堂重回老地方 佟湘玉折磨新跑堂",
+   "titleB": "",
+   "quoteCount": 385,
+   "sample": {
+    "speaker": "莫小贝",
+    "text": "郭芙蓉，你给我等着！哎哎哎，秀才哥哥"
+   }
+  },
+  {
+   "n": 64,
+   "title": "白展堂受累入冤狱 王豆豆为爱跑断腿",
+   "titleA": "白展堂受累入冤狱 王豆豆为爱跑断腿",
+   "titleB": "",
+   "quoteCount": 402,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "对不起了，葵花点穴手～这回信了吧？信了就眨眨眼"
+   }
+  },
+  {
+   "n": 65,
+   "title": "小跑堂患上失忆症 老情人千里送相思",
+   "titleA": "小跑堂患上失忆症 老情人千里送相思",
+   "titleB": "",
+   "quoteCount": 389,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手！李大嘴……你"
+   }
+  },
+  {
+   "n": 66,
+   "title": "郭蔷薇信口传谣言 燕小六夜祭一二三",
+   "titleA": "郭蔷薇信口传谣言 燕小六夜祭一二三",
+   "titleB": "",
+   "quoteCount": 320,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 67,
+   "title": "吕秀才练成点穴手 郭芙蓉含恨归故里",
+   "titleA": "吕秀才练成点穴手 郭芙蓉含恨归故里",
+   "titleB": "",
+   "quoteCount": 365,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "这一招可是必杀技啊，一招出手，无人能敌，大嘴秀才小贝准备好了吗"
+   }
+  },
+  {
+   "n": 68,
+   "title": "祝无双诚觅心上人 辛普森设计娶贤妻",
+   "titleA": "祝无双诚觅心上人 辛普森设计娶贤妻",
+   "titleB": "",
+   "quoteCount": 392,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 69,
+   "title": "佟掌柜收到诅咒信 神算子梦断同福店",
+   "titleA": "佟掌柜收到诅咒信 神算子梦断同福店",
+   "titleB": "",
+   "quoteCount": 398,
+   "sample": {
+    "speaker": "吕秀才",
+    "text": "啊，就剩郝掌柜还有七八两银子没结"
+   }
+  },
+  {
+   "n": 70,
+   "title": "赛貂禅沦为小丫环 佟湘玉卖店赎仇人",
+   "titleA": "赛貂禅沦为小丫环 佟湘玉卖店赎仇人",
+   "titleB": "",
+   "quoteCount": 286,
+   "sample": {
+    "speaker": "祝无双",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 71,
+   "title": "吕秀才流连吉庆街 金湘玉巧设惊魂计",
+   "titleA": "吕秀才流连吉庆街 金湘玉巧设惊魂计",
+   "titleB": "",
+   "quoteCount": 355,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "小贝都听到了，掌柜的，我该怎么办？我该怎么办，掌柜的"
+   }
+  },
+  {
+   "n": 72,
+   "title": "佟掌柜假意改前非 白展堂答错选择题",
+   "titleA": "佟掌柜假意改前非 白展堂答错选择题",
+   "titleB": "",
+   "quoteCount": 476,
+   "sample": {
+    "speaker": "佟湘玉",
+    "text": "秀才，你出去一下，我跟大嘴说几句话"
+   }
+  },
+  {
+   "n": 73,
+   "title": "柳星雨夜遇莽郎君 李大嘴情定美娇娘",
+   "titleA": "柳星雨夜遇莽郎君 李大嘴情定美娇娘",
+   "titleB": "",
+   "quoteCount": 265,
+   "sample": {
+    "speaker": "李大嘴",
+    "text": "哎，我真想学葵花点穴手，我还不如找老白去呢，你知道吧"
+   }
+  },
+  {
+   "n": 74,
+   "title": "柳月云夜投迷魂散 祝无双怒斥冷面人",
+   "titleA": "柳月云夜投迷魂散 祝无双怒斥冷面人",
+   "titleB": "",
+   "quoteCount": 343,
+   "sample": {
+    "speaker": "白展堂",
+    "text": "葵花点穴手"
+   }
+  },
+  {
+   "n": 75,
+   "title": "李大嘴拒演凤求凰 燕小六假礼寄真情",
+   "titleA": "李大嘴拒演凤求凰 燕小六假礼寄真情",
+   "titleB": "",
+   "quoteCount": 295,
+   "sample": {
+    "speaker": "郭芙蓉",
+    "text": "李大嘴，你看就看呗，你别舔行不行？你舔完了人家还看不看了"
+   }
+  },
+  {
+   "n": 76,
+   "title": "莫小贝街头遭绑架 燕小六智擒假绑匪",
+   "titleA": "莫小贝街头遭绑架 燕小六智擒假绑匪",
+   "titleB": "",
+   "quoteCount": 0,
+   "sample": null
+  },
+  {
+   "n": 77,
+   "title": "谢捕头盘查店中人 钱夫人巧取同福店",
+   "titleA": "谢捕头盘查店中人 钱夫人巧取同福店",
+   "titleB": "",
+   "quoteCount": 0,
+   "sample": null
+  },
+  {
+   "n": 78,
+   "title": "杨蕙兰酒后诉衷肠 杜子俊夜访同福店",
+   "titleA": "杨蕙兰酒后诉衷肠 杜子俊夜访同福店",
+   "titleB": "",
+   "quoteCount": 0,
+   "sample": null
+  },
+  {
+   "n": 79,
+   "title": "李大嘴遭遇老情敌 杨蕙兰展开新人生",
+   "titleA": "李大嘴遭遇老情敌 杨蕙兰展开新人生",
+   "titleB": "",
+   "quoteCount": 0,
+   "sample": null
+  },
+  {
+   "n": 80,
+   "title": "燕小六接到调职令 凌腾云夜袭同福店",
+   "titleA": "燕小六接到调职令 凌腾云夜袭同福店",
+   "titleB": "",
+   "quoteCount": 0,
+   "sample": null
+  },
+  {
+   "n": 81,
+   "title": "无题",
+   "titleA": "无题",
+   "titleB": "",
+   "quoteCount": 0,
+   "sample": null
+  }
+ ],
+ "pairs": [
+  {
+   "prompt": "齁死的！大嘴咋不听话，展堂点他",
+   "answer": "葵花点穴手！叫你跟老板娘叫板",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 10,
+   "score": 17.0
+  },
+  {
+   "prompt": "还是让我先为你效劳！排山倒海",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 6,
+   "score": 16.5
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "闪开！排山倒海~",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 21,
+   "score": 16.5
+  },
+  {
+   "prompt": "排山倒海~~~~",
+   "answer": "葵花点穴手！这回我是正当防卫",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 21,
+   "score": 16.5
+  },
+  {
+   "prompt": "小贝你让他走！出了事儿就逃，真不愧是传说中的盗圣哈",
+   "answer": "郭芙蓉，你以前跟秀才再怎么吵，我说过一句风凉话儿没有",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 62,
+   "score": 16.5
+  },
+  {
+   "prompt": "排山倒海~",
+   "answer": "葵花点穴手您是长辈，我怎么能跟你动手呢？这一招献丑了",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "吕秀才",
+   "episode": 67,
+   "score": 16.5
+  },
+  {
+   "prompt": "不值什么钱，如果要没有盗圣两个字，最多也就值个三五两银子",
+   "answer": "三五两银子也是钱嘛，展堂",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "佟湘玉",
+   "episode": 15,
+   "score": 16
+  },
+  {
+   "prompt": "三就是，排山倒海",
+   "answer": "葵花点穴手。点上了",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 17,
+   "score": 16
+  },
+  {
+   "prompt": "葵花点穴手。点上了",
+   "answer": "哈哈，闪开，排山再倒海",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 17,
+   "score": 16
+  },
+  {
+   "prompt": "葵花点穴手了啊",
+   "answer": "排山倒海啦",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 22,
+   "score": 16
+  },
+  {
+   "prompt": "展堂，你不是会点穴嘛，给他止止疼吧",
+   "answer": "行，那我试试吧。葵花点穴手",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 54,
+   "score": 16
+  },
+  {
+   "prompt": "闪开，排山倒海",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 65,
+   "score": 16
+  },
+  {
+   "prompt": "排山倒海！白展堂你完蛋啦",
+   "answer": "我倒觉得该完蛋的是你，我这儿是客栈又不是垃圾站，给你一柱香",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "佟湘玉",
+   "episode": 2,
+   "score": 14.5
+  },
+  {
+   "prompt": "我跟你拼了我！葵花点穴",
+   "answer": "排山倒海",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 2,
+   "score": 14.5
+  },
+  {
+   "prompt": "葵花点穴手！有人，打",
+   "answer": "排山倒海",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 10,
+   "score": 14.5
+  },
+  {
+   "prompt": "帮我照顾好我七舅姥爷他三外甥女",
+   "answer": "葵花点穴手！李大嘴……你",
+   "promptSpeaker": "燕小六",
+   "answerSpeaker": "白展堂",
+   "episode": 65,
+   "score": 14.5
+  },
+  {
+   "prompt": "飞碟！——排山倒海",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "祝无双",
+   "episode": 70,
+   "score": 14.5
+  },
+  {
+   "prompt": "啊，有贼啊！老白，大嘴",
+   "answer": "葵花点穴手！有人，打",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 10,
+   "score": 14.0
+  },
+  {
+   "prompt": "排山倒海",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 10,
+   "score": 14
+  },
+  {
+   "prompt": "缺啥再来啊。展堂，展堂，走额带你接骨头去。秀才拿银子去",
+   "answer": "肯定还没有关门，老白再坚持一会儿，慢点儿。大嘴，你想什么那",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 13,
+   "score": 14
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "排山倒海",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 28,
+   "score": 14
+  },
+  {
+   "prompt": "肯定是小贝的罪！她不是死活要走，掌柜的也不能想不开",
+   "answer": "你接着念哪！掌柜的后面说啥了",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "李大嘴",
+   "episode": 34,
+   "score": 14.0
+  },
+  {
+   "prompt": "掌柜的，快快",
+   "answer": "说就说，去，把大嘴和小贝给我找来，我不信他还要血洗我同福客栈",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "佟湘玉",
+   "episode": 50,
+   "score": 14
+  },
+  {
+   "prompt": "客官，来里边请",
+   "answer": "排山倒海！白展堂你完蛋啦",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 2,
+   "score": 13.5
+  },
+  {
+   "prompt": "哎，掌柜的，她",
+   "answer": "干活咧！马上就要开门咧。大嘴！秀才！开门开门了啊",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "佟湘玉",
+   "episode": 3,
+   "score": 13.5
+  },
+  {
+   "prompt": "干活咧！马上就要开门咧。大嘴！秀才！开门开门了啊",
+   "answer": "哎，秀才，你那本书现在写的怎么样了",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 3,
+   "score": 13.5
+  },
+  {
+   "prompt": "真的，再不就来不及了，他可是盗圣啊",
+   "answer": "盗圣怎么了啊？这都快两年了。展堂的为人，你们又不是不知道",
+   "promptSpeaker": "吕秀才",
+   "answerSpeaker": "佟湘玉",
+   "episode": 5,
+   "score": 13.5
+  },
+  {
+   "prompt": "嫂子你看他",
+   "answer": "你又想抄书了是不是，啊？秀才，把《资治通鉴》拿来给小贝抄",
+   "promptSpeaker": "莫小贝",
+   "answerSpeaker": "佟湘玉",
+   "episode": 13,
+   "score": 13.5
+  },
+  {
+   "prompt": "抓着我干嘛。还打我你？嫂子她欺负我",
+   "answer": "小贝呀，这个掌门，你就打算这么一直当下去啦",
+   "promptSpeaker": "莫小贝",
+   "answerSpeaker": "佟湘玉",
+   "episode": 17,
+   "score": 13.5
+  },
+  {
+   "prompt": "排山倒海~",
+   "answer": "葵花点！这可是你招我的啊",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 21,
+   "score": 13.5
+  },
+  {
+   "prompt": "葵花点穴手！小子，跟我玩",
+   "answer": "掌柜的，出事了",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 22,
+   "score": 13.5
+  },
+  {
+   "prompt": "这叫葵花点穴手",
+   "answer": "秀才！你怎么了？啊",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 23,
+   "score": 13.5
+  },
+  {
+   "prompt": "哎呀，她是掌柜的，过分点也是应该的啊",
+   "answer": "我不是说掌柜的，是郭芙蓉。他们欺负我，而她呢？她„",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "吕秀才",
+   "episode": 26,
+   "score": 13.5
+  },
+  {
+   "prompt": "这上面没写，我估计吧，是说小贝的罪",
+   "answer": "肯定是小贝的罪！她不是死活要走，掌柜的也不能想不开",
+   "promptSpeaker": "吕秀才",
+   "answerSpeaker": "白展堂",
+   "episode": 34,
+   "score": 13.5
+  },
+  {
+   "prompt": "看什么呢？看看看看！住手！郭芙蓉你给我",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "吕秀才",
+   "answerSpeaker": "白展堂",
+   "episode": 36,
+   "score": 13.5
+  },
+  {
+   "prompt": "捕快娶亲，衙门给补贴三十两银子",
+   "answer": "你跟他们说这些干吗？到时候，人归你，银子归我怎么样",
+   "promptSpeaker": "燕小六",
+   "answerSpeaker": "李大嘴",
+   "episode": 40,
+   "score": 13.5
+  },
+  {
+   "prompt": "好好好，你去。你去了，你说什么",
+   "answer": "小贝啊，不得了了，三大派掌门全部歇菜了！江湖上已经炸锅了",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 46,
+   "score": 13.5
+  },
+  {
+   "prompt": "小贝啊，不得了了，三大派掌门全部歇菜了！江湖上已经炸锅了",
+   "answer": "编，接着编",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 46,
+   "score": 13.5
+  },
+  {
+   "prompt": "秀才，秀才",
+   "answer": "注意素质！佟掌柜，你先说，我看好你",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "邢育森",
+   "episode": 50,
+   "score": 13.5
+  },
+  {
+   "prompt": "后会有期，后会有期",
+   "answer": "葵花点穴手！小贝，说",
+   "promptSpeaker": "邢育森",
+   "answerSpeaker": "白展堂",
+   "episode": 50,
+   "score": 13.5
+  },
+  {
+   "prompt": "掌柜的掌柜的，你快跑啊。掌柜的，你记得替我们报仇啊掌柜的",
+   "answer": "葵花点穴手！葵花解穴手，葵花点~你看还有什么说的",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "白展堂",
+   "episode": 65,
+   "score": 13.5
+  },
+  {
+   "prompt": "莫小贝又是谁",
+   "answer": "是我们佟掌柜的小姑子，换句话说我们佟掌柜是她嫂子",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 1,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手~",
+   "answer": "掌柜的管管他~",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "吕秀才",
+   "episode": 4,
+   "score": 13
+  },
+  {
+   "prompt": "传说中的盗圣啊",
+   "answer": "江湖名声直逼当年的楚留香啊",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "佟湘玉",
+   "episode": 5,
+   "score": 13
+  },
+  {
+   "prompt": "你懂什么呀，白大哥虽然是个贼，但他劫富济贫，盗亦有道",
+   "answer": "闭嘴，大嘴。我真的退出江湖了，我白展堂对天发誓",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 5,
+   "score": 13
+  },
+  {
+   "prompt": "我错了我错了，我输了你放过我吧",
+   "answer": "知道错就好，我不是故意的，秀才，大嘴，老白",
+   "promptSpeaker": "吕秀才",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 7,
+   "score": 13
+  },
+  {
+   "prompt": "知道错就好，我不是故意的，秀才，大嘴，老白",
+   "answer": "大嘴，老白，救救我",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "吕秀才",
+   "episode": 7,
+   "score": 13
+  },
+  {
+   "prompt": "对不起，对不起。去买香，还愣着干啥吗",
+   "answer": "我没有银子怎么买香",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 11,
+   "score": 13
+  },
+  {
+   "prompt": "不用，正好家里缺个筷子笼",
+   "answer": "缺啥再来啊。展堂，展堂，走额带你接骨头去。秀才拿银子去",
+   "promptSpeaker": "邢育森",
+   "answerSpeaker": "佟湘玉",
+   "episode": 13,
+   "score": 13
+  },
+  {
+   "prompt": "她是人家掌门",
+   "answer": "不要说掌门，掌窗户也不行。要走你们走，小贝留下，小贝过来",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "佟湘玉",
+   "episode": 17,
+   "score": 13
+  },
+  {
+   "prompt": "我姑夫是娄知县，低调都低调",
+   "answer": "哎呀，不要低调了，大嘴呀，这件事情，你也得好好反省一下",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "佟湘玉",
+   "episode": 19,
+   "score": 13
+  },
+  {
+   "prompt": "炮仗的事情到此为止，你只要把饺子包出来，这个年就算过好了",
+   "answer": "就等着吃我的薄皮大馅，三鲜饺子吧",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 20,
+   "score": 13
+  },
+  {
+   "prompt": "来着不善，展堂点他",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 21,
+   "score": 13
+  },
+  {
+   "prompt": "谁说她要闯荡江湖了",
+   "answer": "掌柜的，小贝迟早是要长大的",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 21,
+   "score": 13
+  },
+  {
+   "prompt": "我就是不讲理，展堂",
+   "answer": "得令，葵花点穴手",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 24,
+   "score": 13
+  },
+  {
+   "prompt": "那大嘴和秀才呢",
+   "answer": "还在外边找呢。掌柜的，你先别着急啊",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 28,
+   "score": 13
+  },
+  {
+   "prompt": "你们先回去睡吧，我想跟小贝单独聊聊",
+   "answer": "嫂子，我错了，我不应该去采那筐毒蘑菇",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "莫小贝",
+   "episode": 28,
+   "score": 13
+  },
+  {
+   "prompt": "小贝，不要再写了，去通知一下秀才他们，快点儿，快点儿",
+   "answer": "哎，秀才来了，我去通知他们啊",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "莫小贝",
+   "episode": 29,
+   "score": 13
+  },
+  {
+   "prompt": "掌柜的，来了",
+   "answer": "郭芙蓉，你告诉我，当初闯荡江湖是为了啥",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "佟湘玉",
+   "episode": 30,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "展堂，这是要上哪儿去呀",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "佟湘玉",
+   "episode": 31,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "葵花解穴手",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "白展堂",
+   "episode": 31,
+   "score": 13
+  },
+  {
+   "prompt": "放着我来，葵花点穴手",
+   "answer": "你看你咋又把他点了呢",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "白展堂",
+   "episode": 31,
+   "score": 13
+  },
+  {
+   "prompt": "你是掌门呀，我是掌柜的，隔行如隔山，咱俩怎么斗呀",
+   "answer": "大不了，我也当掌柜的，肯定比你强一百倍",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "莫小贝",
+   "episode": 38,
+   "score": 13
+  },
+  {
+   "prompt": "那朝廷要缉拿盗圣你也帮忙啊",
+   "answer": "那完全不是一码事儿，展堂又没有害人，再说他已经退隐江湖了",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "佟湘玉",
+   "episode": 41,
+   "score": 13
+  },
+  {
+   "prompt": "我也没有嫁，我这是造的什么孽哟，秀才",
+   "answer": "行了行了，别嚎了，秀才，去把大嘴叫起来",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 43,
+   "score": 13
+  },
+  {
+   "prompt": "除了我嫂子啊",
+   "answer": "我是莫掌门的亲嫂子呀",
+   "promptSpeaker": "莫小贝",
+   "answerSpeaker": "佟湘玉",
+   "episode": 46,
+   "score": 13
+  },
+  {
+   "prompt": "我是莫掌门的亲嫂子呀",
+   "answer": "我是莫掌门的左护法呀",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 46,
+   "score": 13
+  },
+  {
+   "prompt": "好，很好，我押两钱银子给小贝壮壮声势",
+   "answer": "掌柜的，你这不是白白往里扔钱嘛",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "李大嘴",
+   "episode": 46,
+   "score": 13
+  },
+  {
+   "prompt": "展堂，你听我说，不是我要相亲，那是给小贝安排的呀",
+   "answer": "小贝才多大呀，你当我是二百五啊",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 48,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "帮我照顾好我七舅姥爷",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "燕小六",
+   "episode": 50,
+   "score": 13
+  },
+  {
+   "prompt": "那他偷袭本掌门就不可耻了吗",
+   "answer": "这位是衡山派的莫小贝莫掌门",
+   "promptSpeaker": "莫小贝",
+   "answerSpeaker": "祝无双",
+   "episode": 54,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "啊～展大哥你你，师兄你你，葵花解穴手",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "祝无双",
+   "episode": 55,
+   "score": 13
+  },
+  {
+   "prompt": "啊～展大哥你你，师兄你你，葵花解穴手",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "白展堂",
+   "episode": 55,
+   "score": 13
+  },
+  {
+   "prompt": "葵花解穴手",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "白展堂",
+   "episode": 55,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "大嘴，扛回去睡觉去",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 59,
+   "score": 13
+  },
+  {
+   "prompt": "你放开我，我要去看我嫂子",
+   "answer": "小贝你听我说，你嫂子睡了，别吵她好不好",
+   "promptSpeaker": "莫小贝",
+   "answerSpeaker": "白展堂",
+   "episode": 59,
+   "score": 13
+  },
+  {
+   "prompt": "大嘴呢，还有我师兄，还有秀才呢",
+   "answer": "哎，秀才，你在干啥呢",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "佟湘玉",
+   "episode": 60,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "好样的无双，带回衙门侯审",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "燕小六",
+   "episode": 63,
+   "score": 13
+  },
+  {
+   "prompt": "小贝，嫂子的下半辈子就全靠你了",
+   "answer": "嫂子，你在这儿等着吧",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "莫小贝",
+   "episode": 71,
+   "score": 13
+  },
+  {
+   "prompt": "帮我照顾好我七舅姥爷",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "燕小六",
+   "answerSpeaker": "白展堂",
+   "episode": 74,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手",
+   "answer": "都点住了，带回衙门候审，走",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "燕小六",
+   "episode": 74,
+   "score": 13
+  },
+  {
+   "prompt": "葵花点穴手！小贝，说",
+   "answer": "你动不动就吓唬人，我们上课一闹呢，先生就喊邢育森来了！，天下立刻就太平了",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "莫小贝",
+   "episode": 50,
+   "score": 12.0
+  },
+  {
+   "prompt": "掌柜的，哭管什么用？你还是先想想办法把老白劝回来",
+   "answer": "展堂，我错了，你要是听得见，就快回来吧！不要劝了，我哭一会儿",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "佟湘玉",
+   "episode": 61,
+   "score": 12.0
+  },
+  {
+   "prompt": "哎，秀才……秀才，秀才，低调啊！被让太多的人知道",
+   "answer": "李大嘴！出息了啊？还学会酒后乱来",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "佟湘玉",
+   "episode": 73,
+   "score": 12.0
+  },
+  {
+   "prompt": "这可不能怪我，这都是李大嘴造的孽，走就走呗，还锁什么门",
+   "answer": "哎呀，这个死大嘴，到那儿去了？展堂，实在不行，你就——",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "佟湘玉",
+   "episode": 19,
+   "score": 11.5
+  },
+  {
+   "prompt": "别过来，子曾经曰过，武力是解决不了任何问题的",
+   "answer": "排山倒海！——哎哟",
+   "promptSpeaker": "吕秀才",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 29,
+   "score": 11.5
+  },
+  {
+   "prompt": "呃……但是必须得让人家去，毕竟她是掌门是不是",
+   "answer": "掌门怎么啦！小贝她还是个孩子",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "祝无双",
+   "episode": 34,
+   "score": 11.5
+  },
+  {
+   "prompt": "郭芙蓉。秀才——",
+   "answer": "秀才！那件衣服其实是无双做的",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 38,
+   "score": 11.5
+  },
+  {
+   "prompt": "帮我照顾好我七舅姥爷",
+   "answer": "葵花点穴手，你这孩子怎么回事啊？我帮你你砍我，不许闹了啊，葵花解穴手",
+   "promptSpeaker": "燕小六",
+   "answerSpeaker": "白展堂",
+   "episode": 50,
+   "score": 11.5
+  },
+  {
+   "prompt": "别别别……掌柜的，掌柜的，我跟你说……大嘴知错啦！啊",
+   "answer": "大嘴这个瓜汉子呀，就为了请假回家看他老娘",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "佟湘玉",
+   "episode": 57,
+   "score": 11.5
+  },
+  {
+   "prompt": "郭芙蓉，你给我等着！哎哎哎，秀才哥哥",
+   "answer": "小贝妹妹，你就饶了我吧，我肩不能扛手不能提的，真的担当不起你托付的重任",
+   "promptSpeaker": "莫小贝",
+   "answerSpeaker": "吕秀才",
+   "episode": 63,
+   "score": 11.5
+  },
+  {
+   "prompt": "葵花点穴手！李大嘴……你",
+   "answer": "不是不是不是",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "李大嘴",
+   "episode": 65,
+   "score": 11.5
+  },
+  {
+   "prompt": "大嘴，本掌柜亲手写的，你就不拆开来看一看吗",
+   "answer": "掌柜的，你明知道我不认字你整这干啥呀？你嫌我文盲你直说，你说我就一厨子你说我",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "李大嘴",
+   "episode": 69,
+   "score": 11.5
+  },
+  {
+   "prompt": "小贝，这些东西都是从哪弄来的",
+   "answer": "嗯……秀才，我嫂子问你话呢",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "莫小贝",
+   "episode": 3,
+   "score": 11
+  },
+  {
+   "prompt": "小贝，嫂子理解你",
+   "answer": "谢谢嫂子",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "莫小贝",
+   "episode": 3,
+   "score": 11
+  },
+  {
+   "prompt": "她要不吃这套呢",
+   "answer": "那就由我来，葵花点穴——笑脸相迎之。呵呵，莫掌门回来啦",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "白展堂",
+   "episode": 3,
+   "score": 11
+  },
+  {
+   "prompt": "那就由我来，葵花点穴——笑脸相迎之。呵呵，莫掌门回来啦",
+   "answer": "你们干吗呢",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "莫小贝",
+   "episode": 3,
+   "score": 11
+  },
+  {
+   "prompt": "）后头写的啥啊？刺的啥玩意儿你给我念念？我不认字",
+   "answer": "白展堂！把小贝的糖人还她",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 4,
+   "score": 11.0
+  },
+  {
+   "prompt": "闭嘴，大嘴。我真的退出江湖了，我白展堂对天发誓",
+   "answer": "我们不信",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "李大嘴、吕秀才",
+   "episode": 5,
+   "score": 11
+  },
+  {
+   "prompt": "我全都听见啦",
+   "answer": "莫小贝我警告你，你以后再敢跟你嫂子犟嘴，你信不信我重出江湖",
+   "promptSpeaker": "莫小贝",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 9,
+   "score": 11
+  },
+  {
+   "prompt": "别喊了，掌柜的要生气了啊",
+   "answer": "葵花点穴",
+   "promptSpeaker": "吕秀才",
+   "answerSpeaker": "白展堂",
+   "episode": 10,
+   "score": 11
+  },
+  {
+   "prompt": "哎，吃饱了？那就不要再喂了。哟，吃得不少嘛。展堂，解穴",
+   "answer": "好，葵花解穴手！怎么回事？葵花解穴手",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 10,
+   "score": 11.0
+  },
+  {
+   "prompt": "这这可是你自找的，排排排山山山——",
+   "answer": "葵花点穴手",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 19,
+   "score": 11
+  },
+  {
+   "prompt": "葵花点穴手，你乐意啊",
+   "answer": "这有啥的，子曾经曰过——",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "白展堂",
+   "episode": 20,
+   "score": 11
+  },
+  {
+   "prompt": "咋管不了？回屋做你的功课去",
+   "answer": "‘葵花点穴手！’嗒嗒嗒~",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "吕秀才",
+   "episode": 21,
+   "score": 11.0
+  },
+  {
+   "prompt": "不教就不教，赶紧比完赶紧算！我本来也没有想让小贝学武功",
+   "answer": "那怎么行呢，要学就好好学，不能半途而废的！子曾经曰过",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "吕秀才",
+   "episode": 21,
+   "score": 11.0
+  },
+  {
+   "prompt": "好感？掌柜的你放心，我以后再也不会这么干了",
+   "answer": "秀才！这么快就改好了？这也太虚心了吧",
+   "promptSpeaker": "吕秀才",
+   "answerSpeaker": "佟湘玉",
+   "episode": 21,
+   "score": 11.0
+  },
+  {
+   "prompt": "排山倒海~",
+   "answer": "葵花点",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "白展堂",
+   "episode": 21,
+   "score": 11
+  },
+  {
+   "prompt": "葵花点穴手！这回我是正当防卫",
+   "answer": "比武到此结束！吃饭吃饭~",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "佟湘玉",
+   "episode": 21,
+   "score": 11.0
+  },
+  {
+   "prompt": "排山再倒海！六，那天，你问我的那句话，我的回答是",
+   "answer": "啊！救命啊",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "燕小六",
+   "episode": 22,
+   "score": 11.0
+  },
+  {
+   "prompt": "有嫂子算什么？要是我哥还活着，肯定饶不了他们",
+   "answer": "你这是啥话嘛！展堂，带她到后院洗洗去",
+   "promptSpeaker": "莫小贝",
+   "answerSpeaker": "佟湘玉",
+   "episode": 24,
+   "score": 11.0
+  },
+  {
+   "prompt": "我证明。秀才确实吼掌柜的来着",
+   "answer": "郭芙蓉",
+   "promptSpeaker": "郭芙蓉",
+   "answerSpeaker": "吕秀才",
+   "episode": 26,
+   "score": 11
+  },
+  {
+   "prompt": "郭芙蓉，你告诉我，当初闯荡江湖是为了啥",
+   "answer": "闯荡江湖",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "郭芙蓉",
+   "episode": 30,
+   "score": 11
+  },
+  {
+   "prompt": "赶紧揉揉",
+   "answer": "放着我来，葵花点穴手",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "祝无双",
+   "episode": 31,
+   "score": 11
+  },
+  {
+   "prompt": "展堂你也是的，也不帮我劝劝他",
+   "answer": "劝啥啊，人大嘴说的有道理，他是厨子他不做饭，你那银子不是白花了",
+   "promptSpeaker": "佟湘玉",
+   "answerSpeaker": "白展堂",
+   "episode": 32,
+   "score": 11
+  },
+  {
+   "prompt": "哎，放着我来！啊，不，你自己来，自己来",
+   "answer": "这是你做的菜啊？挺香的",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "吕秀才",
+   "episode": 33,
+   "score": 11.0
+  },
+  {
+   "prompt": "你吵吵啥呀！你把小贝吵起来你负责啊",
+   "answer": "对不起，但我是有感而发！掌柜的她想寻死哪",
+   "promptSpeaker": "李大嘴",
+   "answerSpeaker": "吕秀才",
+   "episode": 34,
+   "score": 11.0
+  },
+  {
+   "prompt": "——放着我来",
+   "answer": "胡说，是排山倒海",
+   "promptSpeaker": "祝无双",
+   "answerSpeaker": "佟湘玉",
+   "episode": 34,
+   "score": 11
+  },
+  {
+   "prompt": "为什么啊？我到底哪做错了，你干吗对我下此毒手啊",
+   "answer": "哎呀！秀才，你又不是第一次挨打，不要一惊一诈的，展堂",
+   "promptSpeaker": "吕秀才",
+   "answerSpeaker": "佟湘玉",
+   "episode": 34,
+   "score": 11.0
+  },
+  {
+   "prompt": "掌柜的，掌柜的……她还欠你银子呢",
+   "answer": "展堂，还是你最贴心，拿来吧",
+   "promptSpeaker": "白展堂",
+   "answerSpeaker": "佟湘玉",
+   "episode": 36,
+   "score": 11
+  }
+ ]
+}

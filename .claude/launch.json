@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "tongfu-web",
+      "runtimeExecutable": "zsh",
+      "runtimeArgs": [
+        "-lc",
+        "cd /Users/bryceloskie/i/my-own-swordsman/apps/web && eval \"$(fnm env --shell zsh)\" && fnm use default >/dev/null 2>&1 && pnpm dev"
+      ],
+      "port": 5173
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#a8342a"/>
+  <rect x="6" y="6" width="52" height="52" rx="8" fill="none" stroke="#f4ead8" stroke-width="2" opacity=".55"/>
+  <text x="32" y="27" text-anchor="middle" font-family="Songti SC, STSong, serif" font-size="19" font-weight="700" fill="#fff8ec">同</text>
+  <text x="32" y="49" text-anchor="middle" font-family="Songti SC, STSong, serif" font-size="19" font-weight="700" fill="#fff8ec">福</text>
+</svg>
