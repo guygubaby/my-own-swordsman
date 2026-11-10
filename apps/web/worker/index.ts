@@ -6,7 +6,7 @@ import { z } from "zod"
 import { createAuth } from "./auth"
 import { createDb, type Db } from "./db"
 import type { Env } from "./env"
-import { danmaku, reply, thread, user } from "./schema"
+import { danmaku, extensionToken, reply, thread, user } from "./schema"
 
 type AppEnv = {
   Bindings: Env
@@ -41,6 +41,45 @@ app.get("/api/health", (c) => c.json({ ok: true }))
 
 async function sessionOf(c: Context<AppEnv>) {
   return c.get("auth").api.getSession({ headers: c.req.raw.headers })
+}
+
+async function sha256Hex(value: string) {
+  const digest = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(value),
+  )
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("")
+}
+
+function bearerToken(c: Context<AppEnv>) {
+  const header = c.req.header("authorization") ?? ""
+  return header.toLowerCase().startsWith("bearer ") ? header.slice(7).trim() : ""
+}
+
+/** 插件令牌 -> 用户 id；顺带刷新 lastUsedAt。 */
+async function extensionUserId(c: Context<AppEnv>) {
+  const token = bearerToken(c)
+  if (!token) return null
+  const tokenHash = await sha256Hex(token)
+  const db = c.get("db")
+  const [row] = await db
+    .select({ userId: extensionToken.userId, lastUsedAt: extensionToken.lastUsedAt })
+    .from(extensionToken)
+    .where(eq(extensionToken.tokenHash, tokenHash))
+    .limit(1)
+  if (!row) return null
+
+  // 别把每次请求都变成一次写；一小时刷新一次足够。
+  const now = Date.now()
+  if (!row.lastUsedAt || now - row.lastUsedAt.getTime() > 60 * 60 * 1000) {
+    await db
+      .update(extensionToken)
+      .set({ lastUsedAt: new Date(now) })
+      .where(eq(extensionToken.tokenHash, tokenHash))
+  }
+  return row.userId
 }
 
 const threadInput = z.object({
@@ -270,18 +309,8 @@ app.get("/api/episodes/:n/danmaku", async (c) => {
   return c.json({ danmaku: rows, total: rows.length })
 })
 
-app.post("/api/episodes/:n/danmaku", async (c) => {
-  const n = episodeNumber(c)
-  if (!n) {
-    return c.json({ error: { code: "BAD_REQUEST", message: "回目不对。" } }, 400)
-  }
-  const session = await sessionOf(c)
-  if (!session) {
-    return c.json(
-      { error: { code: "UNAUTHORIZED", message: "先以游客身份登录，再发弹幕。" } },
-      401,
-    )
-  }
+/** 发弹幕的共用逻辑：站内用 cookie 会话，插件用 Bearer 令牌。 */
+async function addDanmaku(c: Context<AppEnv>, n: number, userId: string) {
   const parsed = danmakuInput.safeParse(await c.req.json().catch(() => null))
   if (!parsed.success) {
     return c.json(
@@ -302,7 +331,7 @@ app.post("/api/episodes/:n/danmaku", async (c) => {
     .from(danmaku)
     .where(
       and(
-        eq(danmaku.userId, session.user.id),
+        eq(danmaku.userId, userId),
         gt(danmaku.createdAt, new Date(Date.now() - 2000)),
       ),
     )
@@ -326,7 +355,7 @@ app.post("/api/episodes/:n/danmaku", async (c) => {
     text: parsed.data.text,
     color,
     mode: parsed.data.mode,
-    userId: session.user.id,
+    userId,
     createdAt: now,
   })
 
@@ -344,6 +373,107 @@ app.post("/api/episodes/:n/danmaku", async (c) => {
     },
     201,
   )
+}
+
+app.post("/api/episodes/:n/danmaku", async (c) => {
+  const n = episodeNumber(c)
+  if (!n) {
+    return c.json({ error: { code: "BAD_REQUEST", message: "回目不对。" } }, 400)
+  }
+  const session = await sessionOf(c)
+  if (!session) {
+    return c.json(
+      { error: { code: "UNAUTHORIZED", message: "先以游客身份登录，再发弹幕。" } },
+      401,
+    )
+  }
+  return addDanmaku(c, n, session.user.id)
+})
+
+/* ---------- 浏览器插件（央视网弹幕） ---------- */
+
+function newExtensionToken() {
+  const bytes = crypto.getRandomValues(new Uint8Array(24))
+  return `tf_${Array.from(bytes)
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("")}`
+}
+
+/** 站内（cookie 会话）签发插件令牌，明文只返回这一次。 */
+app.post("/api/extension/token", async (c) => {
+  const session = await sessionOf(c)
+  if (!session) {
+    return c.json(
+      { error: { code: "UNAUTHORIZED", message: "先以游客身份登录，再连接插件。" } },
+      401,
+    )
+  }
+
+  const token = newExtensionToken()
+  const db = c.get("db")
+  // 一人一枚：重新配对就把旧令牌作废，避免令牌表无限增长、旧令牌永久有效。
+  await db.delete(extensionToken).where(eq(extensionToken.userId, session.user.id))
+  await db.insert(extensionToken).values({
+    id: crypto.randomUUID(),
+    userId: session.user.id,
+    tokenHash: await sha256Hex(token),
+    label: (c.req.header("user-agent") ?? "").slice(0, 120) || null,
+    createdAt: new Date(),
+  })
+
+  return c.json({
+    token,
+    user: { id: session.user.id, name: session.user.name },
+  })
+})
+
+/** 插件自检：令牌是否还有效，返回昵称用于角标。 */
+app.get("/api/extension/me", async (c) => {
+  const userId = await extensionUserId(c)
+  if (!userId) {
+    return c.json({ error: { code: "UNAUTHORIZED", message: "插件未连接。" } }, 401)
+  }
+  const [row] = await c
+    .get("db")
+    .select({ name: user.name })
+    .from(user)
+    .where(eq(user.id, userId))
+    .limit(1)
+  return c.json({ connected: true, user: { id: userId, name: row?.name ?? "腐竹" } })
+})
+
+/** 断开：带 Bearer 只删这一枚，带 cookie 删该用户全部。 */
+app.delete("/api/extension/token", async (c) => {
+  const db = c.get("db")
+  const token = bearerToken(c)
+  if (token) {
+    await db
+      .delete(extensionToken)
+      .where(eq(extensionToken.tokenHash, await sha256Hex(token)))
+    return c.json({ ok: true })
+  }
+  const session = await sessionOf(c)
+  if (!session) {
+    return c.json({ error: { code: "UNAUTHORIZED", message: "未登录。" } }, 401)
+  }
+  await db.delete(extensionToken).where(eq(extensionToken.userId, session.user.id))
+  return c.json({ ok: true })
+})
+
+/** 插件发弹幕（Bearer 鉴权，跨站不带 cookie）。 */
+app.post("/api/ext/episodes/:n/danmaku", async (c) => {
+  const n = episodeNumber(c)
+  if (!n) {
+    return c.json({ error: { code: "BAD_REQUEST", message: "回目不对。" } }, 400)
+  }
+  const userId = await extensionUserId(c)
+  if (!userId) {
+    return c.json(
+      { error: { code: "UNAUTHORIZED", message: "插件未连接，请到同福娱乐镇连接账号。" } },
+      401,
+    )
+  }
+  return addDanmaku(c, n, userId)
 })
 
 app.notFound((c) =>

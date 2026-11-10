@@ -12,7 +12,7 @@ import {
   episodeLinks,
   highlights,
 } from "@/data/episodes"
-import { isDemoSource, videoSourceFor } from "@/data/video-sources"
+import { videoSourcesFor } from "@/data/video-sources"
 
 export const Route = createFileRoute("/watch/$episode")({
   component: EpisodePage,
@@ -43,8 +43,7 @@ function EpisodePage() {
   const marks = highlights[episode.n]
   const previous = episodeByNumber.get(episode.n - 1)
   const next = episodeByNumber.get(episode.n + 1)
-  const source = videoSourceFor(episode.n)
-  const demo = isDemoSource(source)
+  const sources = videoSourcesFor(episode.n)
 
   return (
     <div>
@@ -87,8 +86,7 @@ function EpisodePage() {
           key={episode.n}
           episode={episode.n}
           title={episode.title}
-          src={source}
-          demo={demo}
+          sources={sources}
         />
       </div>
 

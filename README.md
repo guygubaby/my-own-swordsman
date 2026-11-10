@@ -49,7 +49,6 @@ D1 数据库：`tongfu-entertainment`，UUID `33c17fba-0b19-4a10-8f6b-2142af1187
 
 - `apps/web` 前端 + Worker（`worker/` 下是 Hono API、Drizzle schema 和 better-auth）
 - `apps/web/drizzle` D1 迁移文件
-- `RESEARCH.md` 功能与素材调研报告
 
 ## 版权
 

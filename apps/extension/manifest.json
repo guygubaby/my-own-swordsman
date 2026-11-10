@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "同福娱乐镇 · 央视网弹幕",
+  "version": "0.1.0",
+  "description": "在央视网《武林外传》播放页叠加同福娱乐镇的弹幕，并支持发弹幕。不改动视频流。",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://tongfu.guygubaby.top/*",
+    "https://tv.cctv.com/*",
+    "https://*.cctv.com/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "同福弹幕"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://tv.cctv.com/*", "https://*.cctv.com/*"],
+      "js": ["content-cctv.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://tongfu.guygubaby.top/*"],
+      "js": ["content-bridge.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

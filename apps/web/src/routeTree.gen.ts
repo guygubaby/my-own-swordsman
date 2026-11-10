@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ConnectExtensionRouteImport } from './routes/connect-extension'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ChainIndexRouteImport } from './routes/chain/index'
 import { Route as ChainThreadIdRouteImport } from './routes/chain/$threadId'
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectExtensionRoute = ConnectExtensionRouteImport.update({
+  id: '/connect-extension',
+  path: '/connect-extension',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -80,6 +86,7 @@ const WatchEpisodeRoute = WatchEpisodeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/connect-extension': typeof ConnectExtensionRoute
   '/shop': typeof ShopRoute
   '/chain/$threadId': typeof ChainThreadIdRoute
   '/games/dumplings': typeof GamesDumplingsRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/connect-extension': typeof ConnectExtensionRoute
   '/shop': typeof ShopRoute
   '/chain/$threadId': typeof ChainThreadIdRoute
   '/games/dumplings': typeof GamesDumplingsRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/connect-extension': typeof ConnectExtensionRoute
   '/shop': typeof ShopRoute
   '/chain/$threadId': typeof ChainThreadIdRoute
   '/games/dumplings': typeof GamesDumplingsRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/connect-extension'
     | '/shop'
     | '/chain/$threadId'
     | '/games/dumplings'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/connect-extension'
     | '/shop'
     | '/chain/$threadId'
     | '/games/dumplings'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/connect-extension'
     | '/shop'
     | '/chain/$threadId'
     | '/games/dumplings'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ConnectExtensionRoute: typeof ConnectExtensionRoute
   ShopRoute: typeof ShopRoute
   ChainThreadIdRoute: typeof ChainThreadIdRoute
   GamesDumplingsRoute: typeof GamesDumplingsRoute
@@ -187,6 +200,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connect-extension': {
+      id: '/connect-extension'
+      path: '/connect-extension'
+      fullPath: '/connect-extension'
+      preLoaderRoute: typeof ConnectExtensionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -258,6 +278,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ConnectExtensionRoute: ConnectExtensionRoute,
   ShopRoute: ShopRoute,
   ChainThreadIdRoute: ChainThreadIdRoute,
   GamesDumplingsRoute: GamesDumplingsRoute,

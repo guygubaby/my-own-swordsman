@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>同福弹幕</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        width: 300px;
+        margin: 0;
+        padding: 14px;
+        background: #17110b;
+        color: #f4e7d3;
+        font: 13px/1.5 -apple-system, "PingFang SC", sans-serif;
+      }
+      h1 {
+        margin: 0 0 2px;
+        font-size: 14px;
+      }
+      p {
+        margin: 0;
+      }
+      .muted {
+        color: rgba(244, 231, 211, 0.6);
+        font-size: 11px;
+      }
+      .state {
+        margin: 12px 0;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+      button {
+        width: 100%;
+        padding: 8px 10px;
+        margin-top: 8px;
+        border: 0;
+        border-radius: 8px;
+        background: #a8342a;
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
+      button.ghost {
+        background: rgba(255, 255, 255, 0.08);
+        color: #f4e7d3;
+      }
+      input {
+        width: 100%;
+        margin-top: 6px;
+        padding: 7px 8px;
+        border: 1px solid rgba(244, 231, 211, 0.2);
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.3);
+        color: #f4e7d3;
+        font: inherit;
+        box-sizing: border-box;
+      }
+      .row {
+        margin-top: 12px;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>同福弹幕</h1>
+    <p class="muted">在央视网《武林外传》页面叠加本站弹幕</p>
+
+    <div class="state" id="state">读取中……</div>
+
+    <button id="connect" type="button">连接同福账号</button>
+    <button id="disconnect" class="ghost hidden" type="button">断开连接</button>
+
+    <div class="row">
+      <p class="muted">自动连接失败时，粘贴 /connect-extension 页面给的令牌：</p>
+      <input id="token" placeholder="tf_…" />
+      <button id="save" class="ghost" type="button">保存令牌</button>
+    </div>
+
+    <div class="row muted" id="hint"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

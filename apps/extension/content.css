@@ -1,0 +1,102 @@
+.tf-dm-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tf-dm-bar {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 56px;
+  z-index: 41;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(20, 14, 9, 0.72);
+  backdrop-filter: blur(6px);
+  color: #f4e7d3;
+  font: 12px/1.4 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+
+.tf-dm-bar.tf-dm-show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.tf-dm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(168, 52, 42, 0.85);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.tf-dm-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid rgba(244, 231, 211, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #f4e7d3;
+  font: inherit;
+  outline: none;
+}
+
+.tf-dm-input:focus {
+  border-color: rgba(244, 231, 211, 0.5);
+}
+
+.tf-dm-btn {
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #a8342a;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tf-dm-btn:hover {
+  background: #8f2a22;
+}
+
+.tf-dm-note {
+  font-size: 11px;
+  color: rgba(244, 231, 211, 0.6);
+  white-space: nowrap;
+}
+
+.tf-dm-tip {
+  position: absolute;
+  left: 10px;
+  bottom: 96px;
+  z-index: 42;
+  max-width: 320px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(20, 14, 9, 0.88);
+  color: #f4e7d3;
+  font: 12px/1.5 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tf-dm-tip.tf-dm-show {
+  opacity: 1;
+}

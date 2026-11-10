@@ -109,4 +109,20 @@ export const danmaku = sqliteTable(
   (table) => [index("danmaku_episode_time_idx").on(table.episode, table.timeMs)],
 )
 
+// 浏览器插件（央视网弹幕）的长期令牌。只存哈希，明文仅在签发时返回一次。
+export const extensionToken = sqliteTable(
+  "extension_token",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    tokenHash: text("token_hash").notNull().unique(),
+    label: text("label"),
+    createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+    lastUsedAt: integer("last_used_at", { mode: "timestamp_ms" }),
+  },
+  (table) => [index("extension_token_user_idx").on(table.userId)],
+)
+
 export const authSchema = { user, session, account, verification }
