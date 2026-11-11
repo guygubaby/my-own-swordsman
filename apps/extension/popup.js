@@ -10,7 +10,6 @@ const els = {
   nickname: document.getElementById("nickname"),
   connect: document.getElementById("connect"),
   disconnect: document.getElementById("disconnect"),
-  endpoint: document.getElementById("endpoint"),
 }
 
 let status = null
@@ -38,9 +37,6 @@ async function render() {
     els.connect.textContent = "重试"
     return
   }
-
-  const base = await apiBase()
-  els.endpoint.textContent = base.replace(/^https?:\/\//, "")
 
   if (status?.connected) {
     const name = status.user?.name || "腐竹"

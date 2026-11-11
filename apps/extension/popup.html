@@ -11,7 +11,6 @@
         --line: rgba(244, 231, 211, 0.12);
         --cream: #f4e7d3;
         --muted: rgba(244, 231, 211, 0.52);
-        --faint: rgba(244, 231, 211, 0.34);
         --cinnabar: #a8342a;
         --cinnabar-hi: #bf4234;
         --gold: #d8b071;
@@ -205,20 +204,6 @@
         border-color: rgba(191, 66, 52, 0.45);
         background: rgba(168, 52, 42, 0.14);
       }
-      footer {
-        display: flex;
-        justify-content: space-between;
-        gap: 8px;
-        margin-top: 10px;
-        padding: 0 2px;
-        color: var(--faint);
-        font-size: 10px;
-      }
-      #endpoint {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
       .hidden {
         display: none !important;
       }
@@ -255,11 +240,6 @@
         <button id="disconnect" class="btn ghost danger hidden" type="button">断开连接</button>
       </div>
     </section>
-
-    <footer>
-      <span>只画一层弹幕，不碰视频流</span>
-      <span id="endpoint"></span>
-    </footer>
 
     <script src="popup.js"></script>
   </body>
