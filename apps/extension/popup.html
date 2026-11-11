@@ -160,13 +160,10 @@
         color: var(--muted);
       }
       .actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 7px;
         margin-top: 12px;
       }
-      #open-cctv {
-        grid-column: 1 / -1;
+      .actions .btn {
+        width: 100%;
       }
       .btn {
         display: inline-flex;
@@ -207,81 +204,6 @@
       .ghost.danger:hover {
         border-color: rgba(191, 66, 52, 0.45);
         background: rgba(168, 52, 42, 0.14);
-      }
-      .manual {
-        margin-top: 10px;
-        padding: 0 12px;
-        border: 1px solid var(--line);
-        border-radius: 11px;
-        background: rgba(244, 231, 211, 0.025);
-      }
-      .manual summary {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 9px 0;
-        list-style: none;
-        color: var(--muted);
-        font-size: 11.5px;
-        cursor: pointer;
-      }
-      .manual summary::-webkit-details-marker {
-        display: none;
-      }
-      .manual summary::after {
-        content: "＋";
-        color: var(--faint);
-        font-size: 12px;
-      }
-      .manual[open] {
-        padding-bottom: 11px;
-      }
-      .manual[open] summary::after {
-        content: "－";
-      }
-      .manual p {
-        margin: 0 0 7px;
-        color: var(--muted);
-        font-size: 10.5px;
-        line-height: 1.55;
-      }
-      .token-row {
-        display: flex;
-        gap: 6px;
-      }
-      input {
-        flex: 1;
-        min-width: 0;
-        height: 32px;
-        padding: 0 9px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(0, 0, 0, 0.28);
-        color: var(--cream);
-        font: 12px/1 ui-monospace, "SF Mono", monospace;
-        outline: none;
-      }
-      input:focus {
-        border-color: rgba(168, 52, 42, 0.55);
-      }
-      #save {
-        height: 32px;
-        padding: 0 12px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(244, 231, 211, 0.08);
-        color: var(--cream);
-        font: inherit;
-        font-size: 12px;
-        cursor: pointer;
-      }
-      #save:hover {
-        background: rgba(244, 231, 211, 0.12);
-      }
-      .error {
-        margin: 7px 0 0;
-        color: #e79a8f;
-        font-size: 10.5px;
       }
       footer {
         display: flex;
@@ -331,30 +253,8 @@
       <div class="actions">
         <button id="connect" class="btn primary" type="button">连接同福账号</button>
         <button id="disconnect" class="btn ghost danger hidden" type="button">断开连接</button>
-        <a id="open-site" class="btn ghost" href="#" target="_blank" rel="noreferrer">
-          同福娱乐镇
-        </a>
-        <a
-          id="open-cctv"
-          class="btn ghost"
-          href="https://tv.cctv.com/2014/07/27/VIDE1406399770522952.shtml"
-          target="_blank"
-          rel="noreferrer"
-        >
-          央视网 · 第一回
-        </a>
       </div>
     </section>
-
-    <details class="manual">
-      <summary>手动令牌</summary>
-      <p>自动连接失败时，把 /connect-extension 页面给的令牌粘进来。</p>
-      <div class="token-row">
-        <input id="token" placeholder="tf_…" autocomplete="off" spellcheck="false" />
-        <button id="save" type="button">保存</button>
-      </div>
-      <p class="error hidden" id="error"></p>
-    </details>
 
     <footer>
       <span>只画一层弹幕，不碰视频流</span>

@@ -10,11 +10,6 @@ const els = {
   nickname: document.getElementById("nickname"),
   connect: document.getElementById("connect"),
   disconnect: document.getElementById("disconnect"),
-  openSite: document.getElementById("open-site"),
-  token: document.getElementById("token"),
-  save: document.getElementById("save"),
-  manual: document.querySelector(".manual"),
-  error: document.getElementById("error"),
   endpoint: document.getElementById("endpoint"),
 }
 
@@ -31,11 +26,6 @@ function setStatus(title, sub, tone = "") {
   els.dot.className = `dot${tone ? ` ${tone}` : ""}`
 }
 
-function setError(text) {
-  els.error.textContent = text ?? ""
-  els.error.classList.toggle("hidden", !text)
-}
-
 async function render() {
   try {
     status = await chrome.runtime.sendMessage({ type: "auth:status" })
@@ -50,7 +40,6 @@ async function render() {
   }
 
   const base = await apiBase()
-  els.openSite.href = base
   els.endpoint.textContent = base.replace(/^https?:\/\//, "")
 
   if (status?.connected) {
@@ -96,27 +85,6 @@ els.disconnect.addEventListener("click", async () => {
   if (!window.confirm("断开后，下次打开同福娱乐镇需要重新连接。确定断开？")) return
   await chrome.runtime.sendMessage({ type: "auth:clear" })
   await render()
-})
-
-els.save.addEventListener("click", async () => {
-  const token = els.token.value.trim()
-  if (!token) {
-    els.token.focus()
-    return
-  }
-  setError(null)
-  const result = await chrome.runtime.sendMessage({ type: "auth:token", token })
-  if (result?.connected) {
-    els.token.value = ""
-    els.manual.open = false
-    await render()
-  } else {
-    setError(result?.error ?? "保存失败，再试一次。")
-  }
-})
-
-els.token.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") els.save.click()
 })
 
 void render()

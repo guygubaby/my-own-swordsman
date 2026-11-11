@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { Link, createFileRoute } from "@tanstack/react-router"
-import { Check, Copy, Download, Loader2, Puzzle } from "lucide-react"
+import { Check, Download, Loader2, Puzzle } from "lucide-react"
 import { api } from "@/lib/api"
 import { authClient } from "@/lib/auth-client"
 import { SectionTitle } from "@/components/site-chrome"
@@ -12,11 +12,10 @@ export const Route = createFileRoute("/connect-extension")({
 type TokenResponse = { token: string; user: { id: string; name: string } }
 
 function ConnectExtensionPage() {
-  const [token, setToken] = useState<string | null>(null)
+  const [connected, setConnected] = useState(false)
   const [nickname, setNickname] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [needLogin, setNeedLogin] = useState(false)
-  const [copied, setCopied] = useState(false)
   const startedRef = useRef(false)
   const tokenRef = useRef<string | null>(null)
 
@@ -34,7 +33,7 @@ function ConnectExtensionPage() {
         const result = await api
           .post("extension/token")
           .json<TokenResponse>()
-        setToken(result.token)
+        setConnected(true)
         tokenRef.current = result.token
         setNickname(result.user.name)
         // 给插件的内容脚本（注入在本站）递令牌；同源 postMessage 不会被第三方读到。
@@ -90,7 +89,7 @@ function ConnectExtensionPage() {
           </>
         ) : error ? (
           <p className="mt-4 text-sm text-cinnabar">{error}</p>
-        ) : token ? (
+        ) : connected ? (
           <>
             <p className="mt-4 flex items-center gap-2 text-sm text-ink">
               <Check className="size-4 text-cinnabar" />
@@ -104,29 +103,8 @@ function ConnectExtensionPage() {
               连接一次就够：插件会自己保持登录。以后令牌失效时，打开本站任意页面会自动重连，
               不用再点插件。
             </p>
-
-            <p className="mt-6 text-[11px] tracking-widest text-ink-soft">
-              自动连接失败时，把这串令牌粘到插件里：
-            </p>
-            <div className="mt-2 flex items-center gap-2">
-              <code className="min-w-0 flex-1 truncate rounded-md border border-border bg-card px-3 py-2 font-mono text-[11px]">
-                {token}
-              </code>
-              <button
-                type="button"
-                onClick={() => {
-                  void navigator.clipboard.writeText(token)
-                  setCopied(true)
-                }}
-                className="inline-flex items-center gap-1 rounded-md border border-border bg-card px-2.5 py-2 text-xs transition-colors hover:border-cinnabar/40 hover:text-cinnabar"
-              >
-                {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
-                {copied ? "已复制" : "复制"}
-              </button>
-            </div>
             <p className="mt-4 text-[11px] leading-relaxed text-ink-soft">
-              令牌等价于你的账号身份，只存哈希在服务端，可以随时在插件里断开。
-              请不要发给别人。
+              连接凭证只存哈希在服务端，可以随时在插件里断开。
             </p>
           </>
         ) : (

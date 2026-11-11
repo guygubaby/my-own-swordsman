@@ -10,7 +10,7 @@
 | `content-cctv.js` | 注入 `tv.cctv.com` 的播放页，找 `.video-js` 容器，叠 canvas 弹幕层 + 底部输入条 |
 | `content-bridge.js` | 注入 `https://tongfu.guygubaby.top`：没连上时用页面登录态静默换令牌（自动续连），也接收配对页 `postMessage` 的令牌 |
 | `background.js` | 唯一网络出口：带 `Authorization: Bearer` 调本站 API，令牌不暴露给页面 |
-| `popup.html/js` | 连接状态、连接按钮、手动粘令牌、断开 |
+| `popup.html/js` | 连接状态、连接 / 断开按钮 |
 | `content.css` | 弹幕层与输入条样式 |
 
 请求链路：
@@ -35,7 +35,7 @@ content-cctv  ──sendMessage──▶  background  ──fetch(Bearer)──�
 
 ## 配置
 
-- `background.js` / `popup.js` 顶部的 `DEFAULT_API_BASE`：接口地址，默认正式站（popup 的「手动令牌」折叠区里也能粘贴令牌）
+- `background.js` / `popup.js` 顶部的 `DEFAULT_API_BASE`：接口地址，默认正式站
 - 想在本地调试：把两处改成 `http://localhost:5173`，并临时在 `manifest.json` 的 `host_permissions` 与 `content-bridge` 的 `matches` 里加上 `http://localhost:5173/*`（默认不带本地地址，发布版只认正式域名）
 - 也可以在 popup 里通过 `chrome.storage.local` 的 `apiBase` 覆盖（未做 UI 时用 devtools 控制台设置）
 
