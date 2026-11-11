@@ -1,8 +1,16 @@
 import { Link, createFileRoute } from "@tanstack/react-router"
 import { ArrowRight, Bomb, Pickaxe, Soup } from "lucide-react"
 import { PaperCard, SectionTitle } from "@/components/site-chrome"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/games/")({
+  head: () =>
+    seo({
+      title: "同福小游戏 · 包饺子、做炮仗、挖地道｜同福娱乐镇",
+      description:
+        "三个从《武林外传》里长出来的小游戏：包饺子看火候、配火药做炮仗、替邢捕头挖地道。没有体力值，免登录直接玩。",
+      path: "/games",
+    }),
   component: GamesPage,
 })
 

@@ -4,8 +4,16 @@ import { LogIn, UserPlus } from "lucide-react"
 import { SectionTitle } from "@/components/site-chrome"
 import { authClient } from "@/lib/auth-client"
 import { syncProgress } from "@/lib/watch-progress"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/login")({
+  head: () =>
+    seo({
+      title: "登录 / 注册 · 同福娱乐镇",
+      description: "登录后可以发弹幕、玩台词接龙、同步观看进度。",
+      path: "/login",
+      noindex: true,
+    }),
   component: LoginPage,
 })
 

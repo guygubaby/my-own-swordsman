@@ -1,4 +1,5 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router"
+import { SeoHead } from "@/components/seo-head"
 import {
   BottomNav,
   EmptyState,
@@ -14,6 +15,7 @@ export const Route = createRootRoute({
 function RootLayout() {
   return (
     <div className="flex min-h-svh flex-col">
+      <SeoHead />
       <SiteHeader />
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-4 pt-6 md:pt-8">
         <Outlet />

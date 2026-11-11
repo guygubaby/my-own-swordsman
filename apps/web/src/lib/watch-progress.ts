@@ -1,5 +1,6 @@
 import { api } from "@/lib/api"
 import { episodeByNumber } from "@/data/episodes"
+import { sendProgressToExtension } from "@/lib/extension-bridge"
 
 export type WatchProgress = {
   episode: number
@@ -86,6 +87,7 @@ export function saveProgress(item: WatchProgress) {
   const all = readAll()
   all[String(item.episode)] = item
   writeAll(all)
+  sendProgressToExtension(item.episode, item.time, item.duration)
   void pushProgress(item)
 }
 
@@ -134,6 +136,7 @@ export async function syncProgress() {
   for (const item of Object.values(merged)) {
     const server = serverByEpisode.get(item.episode)
     if (!server || item.updatedAt > server.updatedAt) void pushProgress(item)
+    sendProgressToExtension(item.episode, item.time, item.duration)
   }
 
   writeAll(merged)

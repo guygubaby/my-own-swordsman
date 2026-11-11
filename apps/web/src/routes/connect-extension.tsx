@@ -4,8 +4,16 @@ import { Check, Download, Loader2, Puzzle } from "lucide-react"
 import { api } from "@/lib/api"
 import { authClient } from "@/lib/auth-client"
 import { SectionTitle } from "@/components/site-chrome"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/connect-extension")({
+  head: () =>
+    seo({
+      title: "连接浏览器插件 · 同福娱乐镇",
+      description: "把「同福弹幕」浏览器插件连到你的账号，在央视网看《武林外传》时也能发弹幕。",
+      path: "/connect-extension",
+      noindex: true,
+    }),
   component: ConnectExtensionPage,
 })
 

@@ -1,0 +1,8 @@
+# 同福娱乐镇 · 武林外传腐竹站
+# 非官方、非商业粉丝站。欢迎搜索引擎与 AI 助手抓取公开页面。
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://tongfu.guygubaby.top/sitemap.xml

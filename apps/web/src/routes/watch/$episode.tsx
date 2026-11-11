@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router"
+import { Link, createFileRoute, useLocation } from "@tanstack/react-router"
 import { ArrowLeft, ChevronLeft, ChevronRight, ExternalLink, Play } from "lucide-react"
 import {
   EmptyState,
@@ -13,13 +13,36 @@ import {
   highlights,
 } from "@/data/episodes"
 import { videoSourcesFor } from "@/data/video-sources"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/watch/$episode")({
+  head: ({ params }) => {
+    const n = Number(params.episode)
+    const episode = Number.isFinite(n) ? episodeByNumber.get(n) : undefined
+    if (!episode) {
+      return seo({
+        title: "这一回不存在 · 同福娱乐镇",
+        description: "八十一回里没找到这一页，回追剧指南重新选一回。",
+        path: `/watch/${params.episode}`,
+        noindex: true,
+      })
+    }
+    const quote = cleanLine(episode.sample?.text)
+    return seo({
+      title: `第${n}回 ${episode.title} · 武林外传｜同福娱乐镇`,
+      description: quote
+        ? `《武林外传》第${n}回「${episode.title}」：${episode.sample?.speaker ?? ""}“${quote}”。附官方正片入口、站内弹幕与章回导航。`
+        : `《武林外传》第${n}回「${episode.title}」的章回信息、官方正片入口与站内弹幕。`,
+      path: `/watch/${n}`,
+    })
+  },
   component: EpisodePage,
 })
 
 function EpisodePage() {
   const { episode: episodeParam } = Route.useParams()
+  const hash = useLocation({ select: (location) => location.hash })
+  const autoResume = hash.replace(/^#/, "") === "resume"
   const n = Number(episodeParam)
   const episode = Number.isFinite(n) ? episodeByNumber.get(n) : undefined
 
@@ -87,6 +110,7 @@ function EpisodePage() {
           episode={episode.n}
           title={episode.title}
           sources={sources}
+          autoResume={Boolean(autoResume)}
         />
       </div>
 

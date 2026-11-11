@@ -63,10 +63,12 @@ export function EpisodePlayer({
   episode,
   title,
   sources,
+  autoResume = false,
 }: {
   episode: number
   title: string
   sources: VideoSource[]
+  autoResume?: boolean
 }) {
   const playable = sources.filter(
     (source): source is PlayableSource => source.kind === "playable",
@@ -93,7 +95,8 @@ export function EpisodePlayer({
   const canSync = Boolean(session?.user && !session.user.isAnonymous)
   const canSyncRef = useRef(canSync)
   const [resume, setResume] = useState<WatchProgress | null>(null)
-  const resumeCheckedRef = useRef(false)
+  const resumeEpisodeRef = useRef<number | null>(null)
+  const autoResumedForRef = useRef<number | null>(null)
   const lastSavedSlotRef = useRef(-1)
 
   useEffect(() => {
@@ -101,9 +104,10 @@ export function EpisodePlayer({
   }, [canSync])
 
   // 进度只给注册用户看；登录状态还没回来时先不弹续播。
+  // 按集记录，换集时重新读，同一集里不因为会话刷新把用户关掉的提示又弹出来。
   useEffect(() => {
-    if (resumeCheckedRef.current || !session?.user) return
-    resumeCheckedRef.current = true
+    if (!session?.user || resumeEpisodeRef.current === episode) return
+    resumeEpisodeRef.current = episode
     if (!session.user.isAnonymous) setResume(getProgress(episode))
   }, [session, episode])
 
@@ -262,6 +266,27 @@ export function EpisodePlayer({
       }
     }
   }, [ready, episode, playerKey])
+
+  // 从首页「继续看」进来：播放器一就绪就跳回上次的时间，不用再点一次。
+  useEffect(() => {
+    if (!autoResume || !resume || autoResumedForRef.current === episode) return
+    const art = artRef.current
+    if (!art) return
+
+    autoResumedForRef.current = episode
+    const apply = () => {
+      art.currentTime = resume.time
+      setResume(null)
+      void art.play()
+    }
+    const video = art.video
+    if (video.readyState >= 1) {
+      apply()
+      return
+    }
+    video.addEventListener("loadedmetadata", apply, { once: true })
+    return () => video.removeEventListener("loadedmetadata", apply)
+  }, [autoResume, resume, episode, ready])
 
   // 同一集里换线路：走 ArtPlayer 的 switchQuality，它会记住 currentTime 再写回。
   // 但 HLS 和本地文件之间互切时 MediaSource 会打架，这种情况直接重建播放器。

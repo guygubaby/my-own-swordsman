@@ -15,8 +15,16 @@ import { cleanLine, episodes } from "@/data/episodes"
 import { authClient } from "@/lib/auth-client"
 import { formatTime } from "@/lib/danmaku"
 import { lastWatched, syncProgress } from "@/lib/watch-progress"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/")({
+  head: () =>
+    seo({
+      title: "同福娱乐镇 · 武林外传腐竹站｜追剧、弹幕、台词接龙",
+      description:
+        "八十一回追剧指南、站内弹幕播放器、央视网弹幕插件、每日台词接龙与同福小游戏。非官方、非商业的武林外传粉丝站。",
+      path: "/",
+    }),
   component: HomePage,
 })
 
@@ -175,6 +183,7 @@ function HomePage() {
           <Link
             to="/watch/$episode"
             params={{ episode: String(resume.episode) }}
+            hash="resume"
             className="inline-flex items-center gap-1 rounded-md bg-cinnabar px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep"
           >
             继续看

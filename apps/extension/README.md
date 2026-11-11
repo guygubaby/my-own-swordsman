@@ -8,7 +8,7 @@
 | 文件 | 作用 |
 |---|---|
 | `content-cctv.js` | 注入 `tv.cctv.com` 的播放页，找 `.video-js` 容器，叠 canvas 弹幕层 + 底部输入条 |
-| `content-bridge.js` | 注入 `https://tongfu.guygubaby.top`：没连上时用页面登录态静默换令牌（自动续连），也接收配对页 `postMessage` 的令牌 |
+| `content-bridge.js` | 注入 `https://tongfu.guygubaby.top`：没连上时用页面登录态静默换令牌（自动续连），接收配对页令牌，并把站内播放进度存到 `chrome.storage.local` |
 | `background.js` | 唯一网络出口：带 `Authorization: Bearer` 调本站 API，令牌不暴露给页面 |
 | `popup.html/js` | 连接状态、连接 / 断开按钮 |
 | `icons/` | 工具栏图标：已连接绿点、未连接红点 |
@@ -29,6 +29,7 @@ content-cctv  ──sendMessage──▶  background  ──fetch(Bearer)──�
 2. 「加载已解压的扩展程序」→ 选这个 `apps/extension` 目录
 3. 登录同福娱乐镇，然后打开站内任意页面——插件会自己签令牌连上（右下角会提示「已自动连接」）
 4. 打开央视网《武林外传》任意一集，鼠标移到播放器上，底部出现输入条，右上角徽标显示昵称
+5. 在站内看到一半再点「去央视网观看」，插件会把央视网的视频跳到同一进度（只对刚打开、还没看的视频生效）
 
 也可以点工具栏的「同福弹幕」图标 → 「连接同福账号」，走 `/connect-extension` 显式配对。
 连接一次后令牌长期有效，不需要每次操作；令牌失效时打开本站任意页面会自动补一枚。

@@ -144,6 +144,14 @@ export function SiteFooter() {
           <Link to="/shop" className="hover:text-cinnabar">
             官方周边情报
           </Link>
+          <a
+            href="https://github.com/guygubaby/my-own-swordsman"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="hover:text-cinnabar"
+          >
+            开源代码
+          </a>
         </div>
         <p className="text-ink-soft/70">餐饮洗浴一条龙，娱乐休闲一体化。美滴狠，美滴狠。</p>
       </div>

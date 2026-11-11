@@ -2,8 +2,16 @@ import { useEffect, useRef, useState } from "react"
 import { Link, createFileRoute } from "@tanstack/react-router"
 import { ArrowLeft, RotateCcw } from "lucide-react"
 import { PaperCard, SectionTitle } from "@/components/site-chrome"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/games/dumplings")({
+  head: () =>
+    seo({
+      title: "包饺子 · 同福小游戏｜同福娱乐镇",
+      description:
+        "佟掌柜馋饺子，郭芙蓉用浆糊包。看准火候、捏在中间，五轮下来看看能拿多少工钱。",
+      path: "/games/dumplings",
+    }),
   component: DumplingsGame,
 })
 

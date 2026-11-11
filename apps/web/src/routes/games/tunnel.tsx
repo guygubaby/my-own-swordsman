@@ -2,8 +2,16 @@ import { useState } from "react"
 import { Link, createFileRoute } from "@tanstack/react-router"
 import { ArrowLeft, Pickaxe, RotateCcw } from "lucide-react"
 import { PaperCard, SectionTitle } from "@/components/site-chrome"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/games/tunnel")({
+  head: () =>
+    seo({
+      title: "挖地道 · 同福小游戏｜同福娱乐镇",
+      description:
+        "邢捕头的「防盗八法」让全客栈挖地道。躲开石头、算好铲子，从客栈后院挖到县衙门。",
+      path: "/games/tunnel",
+    }),
   component: TunnelGame,
 })
 

@@ -3,8 +3,16 @@ import { Link, createFileRoute } from "@tanstack/react-router"
 import { ArrowLeft, Flame, Minus, Plus, RotateCcw } from "lucide-react"
 import { PaperCard, SectionTitle } from "@/components/site-chrome"
 import { evaluate, type IngredientKey, type Outcome } from "@/lib/firecracker"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/games/firecrackers")({
+  head: () =>
+    seo({
+      title: "做炮仗 · 同福小游戏｜同福娱乐镇",
+      description:
+        "硝石、硫磺、木炭，比例不对就是哑炮，放多了炸灶台。配一配「大地春雷」的火药方子。",
+      path: "/games/firecrackers",
+    }),
   component: FirecrackerGame,
 })
 

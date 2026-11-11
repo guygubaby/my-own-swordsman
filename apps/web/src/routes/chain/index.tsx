@@ -22,8 +22,16 @@ import { dailyPair } from "@/data/chain-pairs"
 import { api, type ThreadSummary } from "@/lib/api"
 import { authClient } from "@/lib/auth-client"
 import { dayjs } from "@/lib/dayjs"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/chain/")({
+  head: () =>
+    seo({
+      title: "台词接龙 · 每日一句｜同福娱乐镇",
+      description:
+        "每天一句《武林外传》台词，接得上下句就是同福自己人。游客可看，注册登录后可接龙、发帖。",
+      path: "/chain",
+    }),
   component: ChainPage,
 })
 

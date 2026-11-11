@@ -6,8 +6,16 @@ import {
   SectionTitle,
 } from "@/components/site-chrome"
 import { merch, watchPlatforms } from "@/data/merch"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/shop")({
+  head: () =>
+    seo({
+      title: "武林外传官方周边情报｜同福娱乐镇",
+      description:
+        "吾流 WUSTYLE 收藏卡、20 周年纪念图书与画集等官方授权周边情报汇总。只指路、不卖货、不接支付、不拿佣金。",
+      path: "/shop",
+    }),
   component: ShopPage,
 })
 

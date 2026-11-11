@@ -12,8 +12,16 @@ import {
 import { api, type ThreadDetail } from "@/lib/api"
 import { authClient } from "@/lib/auth-client"
 import { dayjs } from "@/lib/dayjs"
+import { seo } from "@/lib/seo"
 
 export const Route = createFileRoute("/chain/$threadId")({
+  head: ({ params }) =>
+    seo({
+      title: "台词接龙 · 同福娱乐镇",
+      description:
+        "《武林外传》台词接龙楼：接上上一句，看看谁才是真腐竹。注册登录后可回复。",
+      path: `/chain/${params.threadId}`,
+    }),
   component: ThreadPage,
 })
 

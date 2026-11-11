@@ -231,6 +231,44 @@
     draw(t)
   }
 
+  /* ---------------- 站内进度接力 ---------------- */
+
+  let resumeAppliedFor = 0
+  let resumeChecking = false
+
+  function formatTime(seconds) {
+    const s = Math.max(0, Math.floor(seconds))
+    return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`
+  }
+
+  /** 站内看到哪儿，央视这边接着播；只对刚打开、还没看的视频生效。 */
+  async function applySiteProgress() {
+    const episode = state.episode
+    const video = state.video
+    if (!episode || !video || resumeAppliedFor === episode || resumeChecking) return
+
+    resumeChecking = true
+    try {
+      const key = `progress:${episode}`
+      const stored = (await chrome.storage.local.get(key))[key]
+      resumeAppliedFor = episode
+      if (!stored || !Number.isFinite(stored.time) || stored.time < 5) return
+      if (stored.duration > 0 && stored.duration - stored.time <= 10) return
+
+      const seek = () => {
+        if (video.currentTime > 10) return
+        video.currentTime = stored.time
+        showTip(`已跳到上次看到 ${formatTime(stored.time)}`)
+      }
+      if (video.readyState >= 1) seek()
+      else video.addEventListener("loadedmetadata", seek, { once: true })
+    } catch {
+      resumeAppliedFor = episode
+    } finally {
+      resumeChecking = false
+    }
+  }
+
   /* ---------------- UI ---------------- */
 
   let input = null
@@ -446,6 +484,7 @@
       mounted = mount(video)
     }
     if (changed || mounted) void loadDanmaku()
+    if (state.video && state.canvas) void applySiteProgress()
   }
 
   supervise()

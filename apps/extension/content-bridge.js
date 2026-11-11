@@ -103,6 +103,20 @@
     }
     // 刚登录成功：立刻补一枚，不用等下一次进站。
     if (data.type === "tongfu-extension:pair") void autoPair(true)
+    // 站内播放进度：存本地，央视网同一集打开时接着播。
+    if (data.type === "tongfu-extension:progress") {
+      const episode = Number(data.episode)
+      const time = Number(data.time)
+      const duration = Number(data.duration)
+      if (!Number.isInteger(episode) || episode < 1 || !Number.isFinite(time) || time < 5) return
+      void chrome.storage.local.set({
+        [`progress:${episode}`]: {
+          time,
+          duration: Number.isFinite(duration) ? duration : 0,
+          updatedAt: Date.now(),
+        },
+      })
+    }
   })
 
   void autoPair()
