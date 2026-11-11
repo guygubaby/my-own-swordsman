@@ -11,6 +11,7 @@
 | `content-bridge.js` | 注入 `https://tongfu.guygubaby.top`：没连上时用页面登录态静默换令牌（自动续连），也接收配对页 `postMessage` 的令牌 |
 | `background.js` | 唯一网络出口：带 `Authorization: Bearer` 调本站 API，令牌不暴露给页面 |
 | `popup.html/js` | 连接状态、连接 / 断开按钮 |
+| `icons/` | 工具栏图标：已连接绿点、未连接红点 |
 | `content.css` | 弹幕层与输入条样式 |
 
 请求链路：

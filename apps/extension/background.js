@@ -3,6 +3,34 @@
 
 const DEFAULT_API_BASE = "https://tongfu.guygubaby.top"
 
+const ICONS = {
+  on: {
+    16: "icons/on-16.png",
+    32: "icons/on-32.png",
+    48: "icons/on-48.png",
+    128: "icons/on-128.png",
+  },
+  off: {
+    16: "icons/off-16.png",
+    32: "icons/off-32.png",
+    48: "icons/off-48.png",
+    128: "icons/off-128.png",
+  },
+}
+
+/** 工具栏图标：连上小绿点，没连红点。 */
+async function paintAction(connected) {
+  const state = connected ? "on" : "off"
+  try {
+    await Promise.all([
+      chrome.action.setIcon({ path: ICONS[state] }),
+      chrome.action.setTitle({ title: connected ? "同福弹幕 · 已连接" : "同福弹幕 · 未连接" }),
+    ])
+  } catch {
+    /* 图标画不上不影响功能 */
+  }
+}
+
 async function apiBase() {
   const { apiBase } = await chrome.storage.local.get("apiBase")
   return (apiBase || DEFAULT_API_BASE).replace(/\/+$/, "")
@@ -55,7 +83,9 @@ async function authStatus() {
 
 const handlers = {
   async "auth:status"() {
-    return authStatus()
+    const status = await authStatus()
+    await paintAction(Boolean(status.connected))
+    return status
   },
 
   async "auth:token"(message) {
@@ -64,6 +94,7 @@ const handlers = {
     await chrome.storage.local.set({ token })
     await chrome.storage.local.remove("noAutoPair")
     const status = await authStatus()
+    await paintAction(Boolean(status.connected))
     if (status.connected) return status
     if (status.offline) return { ...status, error: "连不上服务器，令牌先存着了。" }
     await chrome.storage.local.remove("token")
@@ -75,6 +106,7 @@ const handlers = {
     await chrome.storage.local.remove("token")
     // 手动断开是明确的「别自动连我」，进站时不再静默配对。
     await chrome.storage.local.set({ noAutoPair: true })
+    await paintAction(false)
     return { connected: false }
   },
 
@@ -112,6 +144,13 @@ const handlers = {
       unauthorized: status === 401,
     }
   },
+}
+
+// 浏览器启动 / 插件安装时把图标补成真实状态，别一直停在红点。
+for (const event of [chrome.runtime.onInstalled, chrome.runtime.onStartup]) {
+  event.addListener(() => {
+    void authStatus().then((status) => paintAction(Boolean(status.connected)))
+  })
 }
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
