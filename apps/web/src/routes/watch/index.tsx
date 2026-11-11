@@ -1,8 +1,12 @@
+import { useEffect, useRef, useState } from "react"
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router"
-import { Search } from "lucide-react"
+import { History, Search } from "lucide-react"
 import { SectionTitle } from "@/components/site-chrome"
 import { cleanLine, episodes } from "@/data/episodes"
+import { authClient } from "@/lib/auth-client"
+import { formatTime } from "@/lib/danmaku"
 import { seo } from "@/lib/seo"
+import { lastWatched, syncProgress } from "@/lib/watch-progress"
 
 export const Route = createFileRoute("/watch/")({
   head: () =>
@@ -21,6 +25,10 @@ export const Route = createFileRoute("/watch/")({
 function WatchPage() {
   const { q } = Route.useSearch()
   const navigate = useNavigate({ from: "/watch/" })
+  const { data: session } = authClient.useSession()
+  const [resume, setResume] = useState<ReturnType<typeof lastWatched>>(null)
+  const resumeCardRef = useRef<HTMLAnchorElement | null>(null)
+  const scrolledRef = useRef(false)
 
   const keyword = q?.trim() ?? ""
   const filtered = keyword
@@ -31,6 +39,37 @@ function WatchPage() {
           cleanLine(episode.sample?.text)?.includes(keyword),
       )
     : episodes
+
+  useEffect(() => {
+    if (!session?.user || session.user.isAnonymous) {
+      setResume(null)
+      return
+    }
+    let cancelled = false
+    void syncProgress().then(() => {
+      if (!cancelled) setResume(lastWatched())
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [session])
+
+  // 上次看的回目不在视野里就滚到中间；只滚一次，别跟用户抢滚动条。
+  useEffect(() => {
+    if (!resume || scrolledRef.current) return
+    const node = resumeCardRef.current
+    if (!node) return
+    const rect = node.getBoundingClientRect()
+    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+      scrolledRef.current = true
+      return
+    }
+    const timer = window.setTimeout(() => {
+      node.scrollIntoView({ block: "center" })
+      scrolledRef.current = true
+    }, 300)
+    return () => window.clearTimeout(timer)
+  }, [resume, keyword])
 
   return (
     <div>
@@ -81,18 +120,32 @@ function WatchPage() {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {filtered.map((episode) => {
             const sample = cleanLine(episode.sample?.text)
+            const isResume = resume?.episode === episode.n
             return (
               <Link
                 key={episode.n}
+                ref={isResume ? resumeCardRef : undefined}
                 to="/watch/$episode"
                 params={{ episode: String(episode.n) }}
-                className="paper-panel group flex flex-col gap-2 rounded-lg p-3.5 transition-transform duration-200 hover:-translate-y-0.5"
+                hash={isResume ? "resume" : undefined}
+                className={
+                  isResume
+                    ? "paper-panel group flex flex-col gap-2 rounded-lg p-3.5 ring-1 ring-cinnabar/40 transition-transform duration-200 hover:-translate-y-0.5"
+                    : "paper-panel group flex flex-col gap-2 rounded-lg p-3.5 transition-transform duration-200 hover:-translate-y-0.5"
+                }
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-1">
                   <span className="font-heading text-xs tracking-[0.18em] text-cinnabar">
                     第 {String(episode.n).padStart(2, "0")} 回
                   </span>
-                  <span className="text-[10px] text-ink-soft">{episode.quoteCount} 句</span>
+                  {isResume ? (
+                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-cinnabar/10 px-1.5 py-0.5 text-[9px] font-medium text-cinnabar">
+                      <History className="size-2.5" />
+                      看到 {formatTime(resume?.time ?? 0)}
+                    </span>
+                  ) : (
+                    <span className="text-[10px] text-ink-soft">{episode.quoteCount} 句</span>
+                  )}
                 </div>
                 <div className="font-heading text-sm leading-snug font-bold text-ink group-hover:text-cinnabar">
                   {episode.title}
