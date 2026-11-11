@@ -1,4 +1,6 @@
-// 站点侧桥接：/connect-extension 页面签好令牌后 postMessage 过来，转交后台保存。
+// 站点侧桥接：整站驻守。
+// 1. 插件没连上、用户又登录着本站时，用页面自己的 cookie 静默签一枚令牌，自动连上。
+// 2. /connect-extension 页面签好令牌后也会 postMessage 过来，同样转交后台保存。
 ;(() => {
   const origin = window.location.origin
   let lastToken = ""
@@ -23,21 +25,66 @@
     setTimeout(() => node.remove(), 5000)
   }
 
-  async function save(token) {
-    if (busy || token === lastToken) return
+  async function save(token, notice = true) {
+    if (busy || token === lastToken) return null
     busy = true
     lastToken = token
     try {
       const result = await chrome.runtime.sendMessage({ type: "auth:token", token })
-      toast(
-        result?.connected
-          ? `同福弹幕插件已连接${result.user?.name ? `：${result.user.name}` : ""}`
-          : `同福弹幕插件：${result?.error ?? "连接失败"}`,
-      )
+      if (notice) {
+        toast(
+          result?.connected
+            ? `同福弹幕插件已连接${result.user?.name ? `：${result.user.name}` : ""}`
+            : `同福弹幕插件：${result?.error ?? "连接失败"}`,
+        )
+      }
+      return result
     } catch {
-      toast("同福弹幕插件：连接失败（扩展可能刚被重载，刷新本页再试）")
+      lastToken = ""
+      if (notice) toast("同福弹幕插件：连接失败（扩展可能刚被重载，刷新本页再试）")
+      return null
     } finally {
       busy = false
+    }
+  }
+
+  /** 静默续连：只在没连上时试，一分钟最多一次；手动断开过的用户不再打扰。 */
+  async function autoPair(force = false) {
+    if (location.pathname.startsWith("/connect-extension")) return
+
+    let status = null
+    try {
+      status = await chrome.runtime.sendMessage({ type: "auth:status" })
+    } catch {
+      return
+    }
+    if (status?.connected) return
+
+    const { noAutoPair, autoPairAt } = await chrome.storage.local.get([
+      "noAutoPair",
+      "autoPairAt",
+    ])
+    if (noAutoPair) return
+    if (!force && Date.now() - Number(autoPairAt || 0) < 60_000) return
+    await chrome.storage.local.set({ autoPairAt: Date.now() })
+
+    try {
+      const response = await fetch("/api/extension/token", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+      })
+      if (!response.ok) return // 没登录：等用户登录后再来
+      const data = await response.json()
+      if (typeof data?.token !== "string") return
+      const result = await save(data.token, false)
+      if (result?.connected) {
+        toast(
+          `同福弹幕已自动连接${result.user?.name ? `：${result.user.name}` : ""}，以后不用手动点了`,
+        )
+      }
+    } catch {
+      /* 网络抖动：下次进站再试 */
     }
   }
 
@@ -49,7 +96,14 @@
   window.addEventListener("message", (event) => {
     if (event.origin !== origin) return
     const data = event.data
-    if (!data || data.type !== "tongfu-extension:token" || typeof data.token !== "string") return
-    void save(data.token)
+    if (!data) return
+    if (data.type === "tongfu-extension:token" && typeof data.token === "string") {
+      void save(data.token)
+      return
+    }
+    // 刚登录成功：立刻补一枚，不用等下一次进站。
+    if (data.type === "tongfu-extension:pair") void autoPair(true)
   })
+
+  void autoPair()
 })()

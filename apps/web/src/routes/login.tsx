@@ -59,6 +59,8 @@ function LoginPage() {
       return
     }
 
+    // 登录成功顺手让插件补个令牌，装过插件的人不用再点一次「连接」。
+    window.postMessage({ type: "tongfu-extension:pair" }, window.location.origin)
     await syncProgress()
     setBusy(false)
     await navigate({ to: "/" })

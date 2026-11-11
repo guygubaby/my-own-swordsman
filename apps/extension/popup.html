@@ -5,83 +5,361 @@
     <title>同福弹幕</title>
     <style>
       :root {
-        color-scheme: light dark;
+        color-scheme: dark;
+        --bg: #17110b;
+        --card: rgba(244, 231, 211, 0.055);
+        --line: rgba(244, 231, 211, 0.12);
+        --cream: #f4e7d3;
+        --muted: rgba(244, 231, 211, 0.52);
+        --faint: rgba(244, 231, 211, 0.34);
+        --cinnabar: #a8342a;
+        --cinnabar-hi: #bf4234;
+        --gold: #d8b071;
+        --jade: #8fbf9f;
       }
-      body {
-        width: 300px;
-        margin: 0;
-        padding: 14px;
-        background: #17110b;
-        color: #f4e7d3;
-        font: 13px/1.5 -apple-system, "PingFang SC", sans-serif;
-      }
-      h1 {
-        margin: 0 0 2px;
-        font-size: 14px;
-      }
-      p {
-        margin: 0;
-      }
-      .muted {
-        color: rgba(244, 231, 211, 0.6);
-        font-size: 11px;
-      }
-      .state {
-        margin: 12px 0;
-        padding: 8px 10px;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.06);
-      }
-      button {
-        width: 100%;
-        padding: 8px 10px;
-        margin-top: 8px;
-        border: 0;
-        border-radius: 8px;
-        background: #a8342a;
-        color: #fff;
-        font: inherit;
-        cursor: pointer;
-      }
-      button.ghost {
-        background: rgba(255, 255, 255, 0.08);
-        color: #f4e7d3;
-      }
-      input {
-        width: 100%;
-        margin-top: 6px;
-        padding: 7px 8px;
-        border: 1px solid rgba(244, 231, 211, 0.2);
-        border-radius: 8px;
-        background: rgba(0, 0, 0, 0.3);
-        color: #f4e7d3;
-        font: inherit;
+      * {
         box-sizing: border-box;
       }
-      .row {
+      body {
+        width: 328px;
+        margin: 0;
+        padding: 16px 16px 12px;
+        background:
+          radial-gradient(120% 80% at 12% -10%, rgba(168, 52, 42, 0.28), transparent 60%),
+          radial-gradient(90% 70% at 100% 0%, rgba(184, 138, 69, 0.13), transparent 55%),
+          var(--bg);
+        color: var(--cream);
+        font: 13px/1.5 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+      .hero {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .seal {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        flex: none;
+        border-radius: 10px;
+        border: 1px solid rgba(216, 176, 113, 0.45);
+        background: linear-gradient(160deg, #b64033, #7f241c);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 248, 236, 0.12),
+          0 6px 16px rgba(0, 0, 0, 0.35);
+        font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        color: #fff3df;
+      }
+      h1 {
+        margin: 0;
+        font-family: "Songti SC", "Noto Serif SC", "SimSun", serif;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      .ver {
+        display: inline-block;
+        margin-left: 4px;
+        padding: 1px 5px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+        font: 9.5px/1.4 ui-monospace, "SF Mono", monospace;
+        vertical-align: 1px;
+      }
+      .hero p {
+        margin: 1px 0 0;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .card {
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: linear-gradient(180deg, var(--card), rgba(244, 231, 211, 0.02));
+      }
+      .status {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        margin-top: 5px;
+        flex: none;
+        border-radius: 50%;
+        background: #6b5b46;
+        box-shadow: 0 0 0 3px rgba(107, 91, 70, 0.18);
+        transition: background 0.2s;
+      }
+      .dot.on {
+        background: var(--jade);
+        box-shadow:
+          0 0 0 3px rgba(143, 191, 159, 0.16),
+          0 0 10px rgba(143, 191, 159, 0.5);
+      }
+      .dot.warn {
+        background: var(--gold);
+        box-shadow: 0 0 0 3px rgba(216, 176, 113, 0.16);
+      }
+      .status-copy {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .status-copy strong {
+        font-size: 13.5px;
+        font-weight: 600;
+      }
+      .status-copy span {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .identity {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 11px;
+        padding-top: 11px;
+        border-top: 1px dashed var(--line);
+      }
+      .avatar {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        flex: none;
+        border-radius: 50%;
+        border: 1px solid rgba(216, 176, 113, 0.35);
+        background: rgba(216, 176, 113, 0.14);
+        color: var(--gold);
+        font-family: "Songti SC", "Noto Serif SC", serif;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .identity-copy {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .name {
+        font-size: 13px;
+        font-weight: 600;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .meta {
+        font-size: 10.5px;
+        color: var(--muted);
+      }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
         margin-top: 12px;
       }
-      .hidden {
+      #open-cctv {
+        grid-column: 1 / -1;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        height: 33px;
+        padding: 0 8px;
+        border: 1px solid transparent;
+        border-radius: 9px;
+        font: inherit;
+        font-size: 12px;
+        text-decoration: none;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+      }
+      .primary {
+        border-color: rgba(255, 248, 236, 0.08);
+        background: var(--cinnabar);
+        color: #fff8ec;
+      }
+      .primary:hover {
+        background: var(--cinnabar-hi);
+      }
+      .ghost {
+        border-color: var(--line);
+        background: rgba(244, 231, 211, 0.05);
+        color: var(--cream);
+      }
+      .ghost:hover {
+        background: rgba(244, 231, 211, 0.09);
+      }
+      .ghost.danger {
+        color: rgba(255, 190, 178, 0.85);
+      }
+      .ghost.danger:hover {
+        border-color: rgba(191, 66, 52, 0.45);
+        background: rgba(168, 52, 42, 0.14);
+      }
+      .manual {
+        margin-top: 10px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: rgba(244, 231, 211, 0.025);
+      }
+      .manual summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 9px 0;
+        list-style: none;
+        color: var(--muted);
+        font-size: 11.5px;
+        cursor: pointer;
+      }
+      .manual summary::-webkit-details-marker {
         display: none;
+      }
+      .manual summary::after {
+        content: "＋";
+        color: var(--faint);
+        font-size: 12px;
+      }
+      .manual[open] {
+        padding-bottom: 11px;
+      }
+      .manual[open] summary::after {
+        content: "－";
+      }
+      .manual p {
+        margin: 0 0 7px;
+        color: var(--muted);
+        font-size: 10.5px;
+        line-height: 1.55;
+      }
+      .token-row {
+        display: flex;
+        gap: 6px;
+      }
+      input {
+        flex: 1;
+        min-width: 0;
+        height: 32px;
+        padding: 0 9px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.28);
+        color: var(--cream);
+        font: 12px/1 ui-monospace, "SF Mono", monospace;
+        outline: none;
+      }
+      input:focus {
+        border-color: rgba(168, 52, 42, 0.55);
+      }
+      #save {
+        height: 32px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(244, 231, 211, 0.08);
+        color: var(--cream);
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      #save:hover {
+        background: rgba(244, 231, 211, 0.12);
+      }
+      .error {
+        margin: 7px 0 0;
+        color: #e79a8f;
+        font-size: 10.5px;
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 0 2px;
+        color: var(--faint);
+        font-size: 10px;
+      }
+      #endpoint {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .hidden {
+        display: none !important;
       }
     </style>
   </head>
   <body>
-    <h1>同福弹幕</h1>
-    <p class="muted">在央视网《武林外传》页面叠加本站弹幕</p>
+    <header class="hero">
+      <div class="seal" aria-hidden="true">同福</div>
+      <div>
+        <h1>同福弹幕<span class="ver" id="ver"></span></h1>
+        <p>央视网《武林外传》弹幕层</p>
+      </div>
+    </header>
 
-    <div class="state" id="state">读取中……</div>
+    <section class="card">
+      <div class="status">
+        <span class="dot" id="dot"></span>
+        <div class="status-copy">
+          <strong id="status-title">正在对暗号……</strong>
+          <span id="status-sub">马上就好</span>
+        </div>
+      </div>
 
-    <button id="connect" type="button">连接同福账号</button>
-    <button id="disconnect" class="ghost hidden" type="button">断开连接</button>
+      <div class="identity hidden" id="identity">
+        <span class="avatar" id="avatar">同</span>
+        <div class="identity-copy">
+          <span class="name" id="nickname">腐竹</span>
+          <span class="meta">自动保持连接 · 换页也不用管</span>
+        </div>
+      </div>
 
-    <div class="row">
-      <p class="muted">自动连接失败时，粘贴 /connect-extension 页面给的令牌：</p>
-      <input id="token" placeholder="tf_…" />
-      <button id="save" class="ghost" type="button">保存令牌</button>
-    </div>
+      <div class="actions">
+        <button id="connect" class="btn primary" type="button">连接同福账号</button>
+        <button id="disconnect" class="btn ghost danger hidden" type="button">断开连接</button>
+        <a id="open-site" class="btn ghost" href="#" target="_blank" rel="noreferrer">
+          同福娱乐镇
+        </a>
+        <a
+          id="open-cctv"
+          class="btn ghost"
+          href="https://tv.cctv.com/2014/07/27/VIDE1406399770522952.shtml"
+          target="_blank"
+          rel="noreferrer"
+        >
+          央视网 · 第一回
+        </a>
+      </div>
+    </section>
 
-    <div class="row muted" id="hint"></div>
+    <details class="manual">
+      <summary>手动令牌</summary>
+      <p>自动连接失败时，把 /connect-extension 页面给的令牌粘进来。</p>
+      <div class="token-row">
+        <input id="token" placeholder="tf_…" autocomplete="off" spellcheck="false" />
+        <button id="save" type="button">保存</button>
+      </div>
+      <p class="error hidden" id="error"></p>
+    </details>
+
+    <footer>
+      <span>只画一层弹幕，不碰视频流</span>
+      <span id="endpoint"></span>
+    </footer>
 
     <script src="popup.js"></script>
   </body>

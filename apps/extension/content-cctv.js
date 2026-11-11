@@ -245,7 +245,7 @@
     const text = (input?.value ?? "").trim()
     if (!text) return
     if (!state.connected) {
-      showTip("先点浏览器工具栏的「同福弹幕」图标连接账号。")
+      showTip("打开同福娱乐镇任意页面会自动连接；也可点工具栏的「同福弹幕」图标。")
       return
     }
     if (text.length > 40) {

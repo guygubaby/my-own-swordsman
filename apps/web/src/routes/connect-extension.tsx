@@ -100,6 +100,10 @@ function ConnectExtensionPage() {
               回到央视网《武林外传》页面刷新一下，右上角就会出现「同福弹幕」。
               这个页面可以关掉了。
             </p>
+            <p className="mt-2 text-[11px] leading-relaxed text-ink-soft">
+              连接一次就够：插件会自己保持登录。以后令牌失效时，打开本站任意页面会自动重连，
+              不用再点插件。
+            </p>
 
             <p className="mt-6 text-[11px] tracking-widest text-ink-soft">
               自动连接失败时，把这串令牌粘到插件里：
@@ -121,7 +125,7 @@ function ConnectExtensionPage() {
               </button>
             </div>
             <p className="mt-4 text-[11px] leading-relaxed text-ink-soft">
-              令牌等价于你的游客身份，只存哈希在服务端，可以随时在插件里断开。
+              令牌等价于你的账号身份，只存哈希在服务端，可以随时在插件里断开。
               请不要发给别人。
             </p>
           </>

@@ -1,7 +1,7 @@
 import { Hono, type Context } from "hono"
 import { bodyLimit } from "hono/body-limit"
 import { logger as requestLogger } from "hono/logger"
-import { and, asc, desc, eq, gt, sql } from "drizzle-orm"
+import { and, asc, desc, eq, gt, inArray, sql } from "drizzle-orm"
 import { z } from "zod"
 import { createAuth } from "./auth"
 import { createDb, type Db } from "./db"
@@ -418,8 +418,17 @@ app.post("/api/extension/token", async (c) => {
 
   const token = newExtensionToken()
   const db = c.get("db")
-  // 一人一枚：重新配对就把旧令牌作废，避免令牌表无限增长、旧令牌永久有效。
-  await db.delete(extensionToken).where(eq(extensionToken.userId, session.user.id))
+  // 每台设备一枚：换电脑 / 重装插件不会把旧设备踢下线；只保留最近 10 枚，旧的自动挤掉。
+  const existing = await db
+    .select({ id: extensionToken.id })
+    .from(extensionToken)
+    .where(eq(extensionToken.userId, session.user.id))
+    .orderBy(desc(extensionToken.createdAt))
+  if (existing.length >= 10) {
+    await db
+      .delete(extensionToken)
+      .where(inArray(extensionToken.id, existing.slice(9).map((row) => row.id)))
+  }
   await db.insert(extensionToken).values({
     id: crypto.randomUUID(),
     userId: session.user.id,
@@ -476,7 +485,7 @@ app.post("/api/ext/episodes/:n/danmaku", async (c) => {
   const userId = await extensionUserId(c)
   if (!userId) {
     return c.json(
-      { error: { code: "UNAUTHORIZED", message: "插件未连接，请到同福娱乐镇连接账号。" } },
+      { error: { code: "UNAUTHORIZED", message: "插件登录失效了，打开同福娱乐镇任意页面会自动重连。" } },
       401,
     )
   }

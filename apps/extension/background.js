@@ -40,7 +40,12 @@ async function authStatus() {
   try {
     const { ok, status, data } = await call("extension/me")
     if (ok) return { connected: true, user: data?.user ?? null }
-    if (status === 401) return { connected: false, expired: true }
+    if (status === 401) {
+      // 令牌已经被服务端作废（换设备、重新配对、库里被清），清掉本地的，
+      // 下次打开同福娱乐镇时内容脚本会自动补一枚新的。
+      await chrome.storage.local.remove("token")
+      return { connected: false, expired: true }
+    }
     return { connected: false, offline: true }
   } catch {
     // 网络问题：令牌先留着，别把用户踢下线
@@ -57,6 +62,7 @@ const handlers = {
     const token = String(message.token || "").trim()
     if (!token) return { error: "令牌是空的。" }
     await chrome.storage.local.set({ token })
+    await chrome.storage.local.remove("noAutoPair")
     const status = await authStatus()
     if (status.connected) return status
     if (status.offline) return { ...status, error: "连不上服务器，令牌先存着了。" }
@@ -67,7 +73,15 @@ const handlers = {
   async "auth:clear"() {
     await call("extension/token", { method: "DELETE" })
     await chrome.storage.local.remove("token")
+    // 手动断开是明确的「别自动连我」，进站时不再静默配对。
+    await chrome.storage.local.set({ noAutoPair: true })
     return { connected: false }
+  },
+
+  // 用户主动点「连接」：解除静默配对禁令，登录成功后桥接会自动补令牌。
+  async "auth:allowAuto"() {
+    await chrome.storage.local.remove("noAutoPair")
+    return { ok: true }
   },
 
   async "danmaku:list"(message) {

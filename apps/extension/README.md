@@ -8,7 +8,7 @@
 | 文件 | 作用 |
 |---|---|
 | `content-cctv.js` | 注入 `tv.cctv.com` 的播放页，找 `.video-js` 容器，叠 canvas 弹幕层 + 底部输入条 |
-| `content-bridge.js` | 注入 `https://tongfu.guygubaby.top`，接收配对页 `postMessage` 过来的令牌 |
+| `content-bridge.js` | 注入 `https://tongfu.guygubaby.top`：没连上时用页面登录态静默换令牌（自动续连），也接收配对页 `postMessage` 的令牌 |
 | `background.js` | 唯一网络出口：带 `Authorization: Bearer` 调本站 API，令牌不暴露给页面 |
 | `popup.html/js` | 连接状态、连接按钮、手动粘令牌、断开 |
 | `content.css` | 弹幕层与输入条样式 |
@@ -26,15 +26,16 @@ content-cctv  ──sendMessage──▶  background  ──fetch(Bearer)──�
 
 1. 打开 `chrome://extensions`，右上角开「开发者模式」
 2. 「加载已解压的扩展程序」→ 选这个 `apps/extension` 目录
-3. 点工具栏的「同福弹幕」图标 → 「连接同福账号」
-4. 会打开本站 `/connect-extension`，签发令牌后自动连上，并提示可以关掉页面
-5. 打开央视网《武林外传》任意一集，鼠标移到播放器上，底部出现输入条，右上角徽标显示昵称
+3. 登录同福娱乐镇，然后打开站内任意页面——插件会自己签令牌连上（右下角会提示「已自动连接」）
+4. 打开央视网《武林外传》任意一集，鼠标移到播放器上，底部出现输入条，右上角徽标显示昵称
 
-没自动连上时，`/connect-extension` 页面会把令牌明文显示出来，粘到 popup 里「保存令牌」即可。
+也可以点工具栏的「同福弹幕」图标 → 「连接同福账号」，走 `/connect-extension` 显式配对。
+连接一次后令牌长期有效，不需要每次操作；令牌失效时打开本站任意页面会自动补一枚。
+换设备 / 重装插件各算一台，最多同时保留 10 枚令牌，互不顶号。
 
 ## 配置
 
-- `background.js` / `popup.js` 顶部的 `DEFAULT_API_BASE`：接口地址，默认正式站
+- `background.js` / `popup.js` 顶部的 `DEFAULT_API_BASE`：接口地址，默认正式站（popup 的「手动令牌」折叠区里也能粘贴令牌）
 - 想在本地调试：把两处改成 `http://localhost:5173`，并临时在 `manifest.json` 的 `host_permissions` 与 `content-bridge` 的 `matches` 里加上 `http://localhost:5173/*`（默认不带本地地址，发布版只认正式域名）
 - 也可以在 popup 里通过 `chrome.storage.local` 的 `apiBase` 覆盖（未做 UI 时用 devtools 控制台设置）
 
@@ -52,7 +53,7 @@ content-cctv  ──sendMessage──▶  background  ──fetch(Bearer)──�
 ## 排查
 
 - **页面没出现输入条**：确认地址是 `tv.cctv.com` 且标题含「武林外传」。播放器是懒加载的，插件每秒找一次 `<video>`。
-- **徽标显示「未连接 · 点扩展图标」**：点图标 → 连接账号；或令牌过期了，重新连。
+- **徽标显示「未连接 · 点扩展图标」**：先打开同福娱乐镇任意页面，插件会自动补令牌；还不行再点图标 → 连接账号（确认本站已登录）。
 - **弹幕不动**：弹幕按 `video.currentTime` 走，视频暂停时本来就静止；自己的弹幕在暂停时也会立刻可见。
 - **看渲染状态**：控制台执行
   ```js
