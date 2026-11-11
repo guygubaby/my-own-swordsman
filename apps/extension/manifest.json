@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "同福娱乐镇 · 央视网弹幕",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "在央视网《武林外传》播放页叠加同福娱乐镇的弹幕，并支持发弹幕。不改动视频流。",
   "icons": {
     "16": "icons/on-16.png",

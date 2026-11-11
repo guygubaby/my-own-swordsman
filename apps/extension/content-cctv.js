@@ -1,12 +1,27 @@
 // 央视网《武林外传》弹幕层：只画弹幕、只发弹幕，不碰视频流。
 // 网络请求全部交给 background.js（那里有 Bearer 令牌 + host_permissions）。
 ;(() => {
-  if (!/武林外传/.test(document.title)) return
+  // 央视的剧集页是懒加载 / 站内跳转，标题和播放器都可能晚到，
+  // 所以不在启动时一次性判定，交给下面的 supervise 每秒补一次。
+  function hrefText() {
+    try {
+      return decodeURIComponent(location.href)
+    } catch {
+      return location.href
+    }
+  }
 
-  const episode =
-    Number((document.title.match(/第\s*(\d+)\s*集/) || [])[1]) ||
-    Number((decodeURIComponent(location.href).match(/第\s*(\d+)\s*集/) || [])[1])
-  if (!episode) return
+  function showOnPage() {
+    return /武林外传/.test(document.title) || /武林外传/.test(hrefText())
+  }
+
+  function readEpisode() {
+    return (
+      Number((document.title.match(/第\s*(\d+)\s*集/) || [])[1]) ||
+      Number((hrefText().match(/第\s*(\d+)\s*集/) || [])[1]) ||
+      0
+    )
+  }
 
   const FONT = 20
   const LANE_HEIGHT = FONT + 10
@@ -14,6 +29,7 @@
   const FIXED_SECONDS = 4
 
   const state = {
+    episode: 0,
     queue: [],
     active: [],
     cursor: 0,
@@ -81,6 +97,8 @@
   }
 
   async function loadDanmaku() {
+    const episode = state.episode
+    if (!episode) return
     try {
       const result = await chrome.runtime.sendMessage({ type: "danmaku:list", episode })
       if (result?.danmaku) merge(result.danmaku)
@@ -197,11 +215,6 @@
   }
 
   function frame() {
-    const video = pickVideo()
-    if (video && video !== state.video) {
-      state.video = video
-      mount(video)
-    }
     if (!state.video || !state.ctx) return
 
     const t = state.video.currentTime
@@ -252,6 +265,10 @@
       showTip("最多 40 个字。")
       return
     }
+    if (!state.episode) {
+      showTip("还没识别到集数，等播放器加载好再发。")
+      return
+    }
 
     const timeMs = Math.round((state.video?.currentTime ?? 0) * 1000)
     const tempId = `local-${Date.now()}-${Math.random().toString(16).slice(2)}`
@@ -279,7 +296,7 @@
     try {
       result = await chrome.runtime.sendMessage({
         type: "danmaku:send",
-        episode,
+        episode: state.episode,
         timeMs,
         text,
         color: "#ffd166",
@@ -316,7 +333,17 @@
     if (!video) return false
     const container = pickContainer(video)
     if (!container) return false
-    if (container.querySelector(".tf-dm-layer")) return true
+    if (state.canvas && state.canvas === container.querySelector(".tf-dm-layer")) return true
+
+    // 站点重渲染后旧的一层可能还留在页面里，先清干净再挂，避免叠两层。
+    for (const node of container.querySelectorAll(".tf-dm-layer, .tf-dm-bar, .tf-dm-tip")) {
+      node.remove()
+    }
+    if (state.container && state.container !== container) {
+      for (const node of state.container.querySelectorAll(".tf-dm-layer, .tf-dm-bar, .tf-dm-tip")) {
+        node.remove()
+      }
+    }
 
     if (getComputedStyle(container).position === "static") {
       container.style.position = "relative"
@@ -387,23 +414,46 @@
 
   /* ---------------- 启动 ---------------- */
 
-  function boot(video) {
-    state.video = video
-    if (!mount(video)) return false
-    void loadDanmaku()
-    void refreshAuth()
-    return true
+  function resetForEpisode(episode) {
+    state.episode = episode
+    state.queue = []
+    state.active = []
+    state.cursor = 0
+    state.lastTime = 0
   }
 
-  if (!boot(pickVideo())) {
-    // 播放器是懒加载的，等它出现再挂。
-    const timer = window.setInterval(() => {
-      const video = pickVideo()
-      if (video && boot(video)) window.clearInterval(timer)
-    }, 1000)
+  /** 每秒巡检：标题/集数晚到、播放器懒加载、站点重渲染容器，都在这里兜住。 */
+  function supervise() {
+    if (!showOnPage()) return
+
+    const episode = readEpisode()
+    if (!episode) return
+    const changed = episode !== state.episode
+    if (changed) resetForEpisode(episode)
+
+    const video = pickVideo()
+    if (!video) return
+    const container = pickContainer(video)
+    const needMount =
+      video !== state.video ||
+      !state.canvas ||
+      !state.canvas.isConnected ||
+      state.canvas.parentElement !== container
+
+    let mounted = false
+    if (needMount) {
+      state.video = video
+      mounted = mount(video)
+    }
+    if (changed || mounted) void loadDanmaku()
   }
 
+  supervise()
   requestAnimationFrame(tick)
+  window.setInterval(supervise, 1000)
   window.setInterval(() => void loadDanmaku(), 20000)
   window.setInterval(() => void refreshAuth(), 60000)
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) supervise()
+  })
 })()
