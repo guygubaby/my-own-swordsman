@@ -22,7 +22,7 @@ export const Route = createFileRoute("/watch/$episode")({
     if (!episode) {
       return seo({
         title: "这一回不存在 · 同福娱乐镇",
-        description: "八十一回里没找到这一页，回追剧指南重新选一回。",
+        description: "八十回里没找到这一页，回追剧指南重新选一回。",
         path: `/watch/${params.episode}`,
         noindex: true,
       })
@@ -51,7 +51,7 @@ function EpisodePage() {
       <div className="py-10">
         <EmptyState
           title="这一回不存在"
-          description="八十一回里没找到这一页。"
+          description="八十回里没找到这一页。"
           action={
             <Link to="/watch" search={{ q: undefined }} className="mt-3 text-sm font-medium text-cinnabar">
               回追剧指南

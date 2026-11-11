@@ -11,9 +11,9 @@ import { lastWatched, syncProgress } from "@/lib/watch-progress"
 export const Route = createFileRoute("/watch/")({
   head: () =>
     seo({
-      title: "追剧指南 · 武林外传八十一回｜同福娱乐镇",
+      title: "追剧指南 · 武林外传八十回｜同福娱乐镇",
       description:
-        "武林外传八十一回章回目录：每回的章回名、经典台词与央视网、爱奇艺官方正片入口，附站内演示播放器与弹幕。",
+        "武林外传八十回章回目录：每回的章回名、经典台词与央视网、爱奇艺官方正片入口，附站内演示播放器与弹幕。",
       path: "/watch",
     }),
   validateSearch: (search: Record<string, unknown>) => ({
@@ -74,7 +74,7 @@ function WatchPage() {
   return (
     <div>
       <SectionTitle
-        kicker="八十一回"
+        kicker="八十回"
         title="追剧指南"
         description="每回一张木牌，写着章回名、原剧台词和官方正片入口。站内播放器目前是演示片源，正片请到爱奇艺、央视网或央视频看。"
       />

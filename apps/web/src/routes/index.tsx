@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
     seo({
       title: "同福娱乐镇 · 武林外传腐竹站｜追剧、弹幕、台词接龙",
       description:
-        "八十一回追剧指南、站内弹幕播放器、央视网弹幕插件、每日台词接龙与同福小游戏。非官方、非商业的武林外传粉丝站。",
+        "八十回追剧指南、站内弹幕播放器、央视网弹幕插件、每日台词接龙与同福小游戏。非官方、非商业的武林外传粉丝站。",
       path: "/",
     }),
   component: HomePage,
@@ -32,9 +32,9 @@ const features = [
   {
     to: "/watch" as const,
     title: "追剧指南",
-    description: "八十一回章回目录，站内演示播放器、弹幕和官方正片指路。",
+    description: "八十回章回目录，站内演示播放器、弹幕和官方正片指路。",
     icon: TvMinimalPlay,
-    meta: "81 回",
+    meta: "80 回",
   },
   {
     to: "/chain" as const,

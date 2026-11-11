@@ -35,11 +35,14 @@ const sampleOverrides: Record<number, ScriptQuote> = {
   70: { speaker: "郭芙蓉", text: "飞碟！——排山倒海！" },
 }
 
-export const episodes: Episode[] = data.episodes.map((episode) => ({
-  ...episode,
-  sample: sampleOverrides[episode.n] ?? episode.sample,
-}))
-export const rawPairs: RawPair[] = data.pairs
+// 官方正片是八十回；原始剧本数据里多出的第 81 回是「无题」特辑，站点不再收录。
+export const episodes: Episode[] = data.episodes
+  .filter((episode) => episode.n <= 80)
+  .map((episode) => ({
+    ...episode,
+    sample: sampleOverrides[episode.n] ?? episode.sample,
+  }))
+export const rawPairs: RawPair[] = data.pairs.filter((pair) => pair.episode <= 80)
 export const episodeByNumber = new Map(episodes.map((episode) => [episode.n, episode]))
 
 export function cleanLine(text: string | null | undefined): string | null {

@@ -1,6 +1,6 @@
 # 同福娱乐镇
 
-> 非官方、非商业的《武林外传》粉丝站，站点位于 https://tongfu.guygubaby.top 。内容为八十一回章回目录与追剧指南、站内演示播放器与弹幕、央视网弹幕浏览器插件、每日台词接龙、三个同福小游戏，以及官方授权周边情报。本站不托管、不转码、不抓取任何剧集，正片请前往央视网、爱奇艺或央视频观看。
+> 非官方、非商业的《武林外传》粉丝站，站点位于 https://tongfu.guygubaby.top 。内容为八十回章回目录与追剧指南、站内演示播放器与弹幕、央视网弹幕浏览器插件、每日台词接龙、三个同福小游戏，以及官方授权周边情报。本站不托管、不转码、不抓取任何剧集，正片请前往央视网、爱奇艺或央视频观看。
 
 ## 关键事实
 
@@ -18,7 +18,7 @@
 ## 核心页面
 
 - [首页](https://tongfu.guygubaby.top/)：站点入口与功能概览。
-- [追剧指南](https://tongfu.guygubaby.top/watch)：八十一回章回名、原剧台词与官方正片入口；支持按章回名、台词或回数搜索。
+- [追剧指南](https://tongfu.guygubaby.top/watch)：八十回章回名、原剧台词与官方正片入口；支持按章回名、台词或回数搜索。
 - [台词接龙](https://tongfu.guygubaby.top/chain)：每日一句台词，楼中楼接龙；注册后可发帖回复。
 - [同福小游戏](https://tongfu.guygubaby.top/games)：包饺子、做炮仗、挖地道三个原创小游戏，免登录。
 - [周边情报](https://tongfu.guygubaby.top/shop)：官方授权周边、纪念图书与画集的情报汇总，只指路不卖货。
@@ -27,7 +27,7 @@
 
 ## 分集页面
 
-每回一个页面，形如 https://tongfu.guygubaby.top/watch/1 （第 1 回）至 https://tongfu.guygubaby.top/watch/81 （第 81 回，特辑）。页面含章回名、经典台词、本回看点与官方正片入口。
+每回一个页面，形如 https://tongfu.guygubaby.top/watch/1 （第 1 回）至 https://tongfu.guygubaby.top/watch/80 （第 80 回）。页面含章回名、经典台词、本回看点与官方正片入口。
 
 ## 常见问题
 
