@@ -212,6 +212,9 @@
         text-align: right;
       }
       footer a {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
         color: var(--muted);
         font-size: 11px;
         text-decoration: none;
@@ -219,6 +222,10 @@
       }
       footer a:hover {
         color: var(--gold);
+      }
+      footer svg {
+        width: 11px;
+        height: 11px;
       }
       .hidden {
         display: none !important;
@@ -257,7 +264,12 @@
 
       <footer>
         <a id="open-site" href="https://tongfu.guygubaby.top" target="_blank" rel="noreferrer">
-          同福娱乐镇 ↗
+          同福娱乐镇
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 3h6v6" />
+            <path d="M10 14 21 3" />
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          </svg>
         </a>
       </footer>
     </div>
