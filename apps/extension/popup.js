@@ -10,6 +10,7 @@ const els = {
   nickname: document.getElementById("nickname"),
   connect: document.getElementById("connect"),
   disconnect: document.getElementById("disconnect"),
+  openSite: document.getElementById("open-site"),
 }
 
 let status = null
@@ -38,9 +39,11 @@ async function render() {
     return
   }
 
+  els.openSite.href = await apiBase()
+
   if (status?.connected) {
     const name = status.user?.name || "腐竹"
-    setStatus("已连接", "发弹幕、看弹幕都不用再操作", "on")
+    setStatus("已连接", "", "on")
     els.identity.classList.remove("hidden")
     els.avatar.textContent = name.slice(0, 1)
     els.nickname.textContent = name

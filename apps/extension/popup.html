@@ -19,16 +19,26 @@
       * {
         box-sizing: border-box;
       }
+      html {
+        background: #0d0906;
+      }
       body {
-        width: 328px;
+        width: 344px;
         margin: 0;
-        padding: 16px 16px 12px;
+        padding: 8px;
+        background: #0d0906;
+        color: var(--cream);
+        font: 13px/1.5 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+      .app {
+        padding: 14px 14px 10px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 16px;
         background:
           radial-gradient(120% 80% at 12% -10%, rgba(168, 52, 42, 0.28), transparent 60%),
           radial-gradient(90% 70% at 100% 0%, rgba(184, 138, 69, 0.13), transparent 55%),
           var(--bg);
-        color: var(--cream);
-        font: 13px/1.5 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
       }
       .hero {
         display: flex;
@@ -142,21 +152,13 @@
         font-size: 13px;
         font-weight: 700;
       }
-      .identity-copy {
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-      }
       .name {
+        min-width: 0;
         font-size: 13px;
         font-weight: 600;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-      }
-      .meta {
-        font-size: 10.5px;
-        color: var(--muted);
       }
       .actions {
         margin-top: 12px;
@@ -204,13 +206,28 @@
         border-color: rgba(191, 66, 52, 0.45);
         background: rgba(168, 52, 42, 0.14);
       }
+      footer {
+        margin-top: 10px;
+        padding-right: 2px;
+        text-align: right;
+      }
+      footer a {
+        color: var(--muted);
+        font-size: 11px;
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      footer a:hover {
+        color: var(--gold);
+      }
       .hidden {
         display: none !important;
       }
     </style>
   </head>
   <body>
-    <header class="hero">
+    <div class="app">
+      <header class="hero">
       <div class="seal" aria-hidden="true">同福</div>
       <div>
         <h1>同福弹幕<span class="ver" id="ver"></span></h1>
@@ -229,10 +246,7 @@
 
       <div class="identity hidden" id="identity">
         <span class="avatar" id="avatar">同</span>
-        <div class="identity-copy">
-          <span class="name" id="nickname">腐竹</span>
-          <span class="meta">自动保持连接 · 换页也不用管</span>
-        </div>
+        <span class="name" id="nickname">腐竹</span>
       </div>
 
       <div class="actions">
@@ -240,6 +254,13 @@
         <button id="disconnect" class="btn ghost danger hidden" type="button">断开连接</button>
       </div>
     </section>
+
+      <footer>
+        <a id="open-site" href="https://tongfu.guygubaby.top" target="_blank" rel="noreferrer">
+          同福娱乐镇 ↗
+        </a>
+      </footer>
+    </div>
 
     <script src="popup.js"></script>
   </body>
