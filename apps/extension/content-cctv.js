@@ -53,6 +53,8 @@
       text: String(item.text ?? ""),
       color: /^#[0-9a-fA-F]{6}$/.test(item.color ?? "") ? item.color : "#fff8ec",
       mode: item.mode === "top" || item.mode === "bottom" ? item.mode : "scroll",
+      // 发送时已经手动上屏，队列循环不要再放一次。
+      spawned: false,
     }
   }
 
@@ -209,6 +211,7 @@
     while (state.cursor < state.queue.length && state.queue[state.cursor].timeMs / 1000 <= t) {
       const item = state.queue[state.cursor]
       state.cursor += 1
+      if (item.spawned) continue
       if (t - item.timeMs / 1000 < 2) spawn(item, t)
     }
 
@@ -251,6 +254,27 @@
     }
 
     const timeMs = Math.round((state.video?.currentTime ?? 0) * 1000)
+    const tempId = `local-${Date.now()}-${Math.random().toString(16).slice(2)}`
+    const optimistic = {
+      id: tempId,
+      timeMs,
+      text,
+      color: "#ffd166",
+      mode: "scroll",
+      spawned: true,
+    }
+
+    // 先上屏再发请求：网慢也不耽误看见自己的弹幕。
+    state.queue.push(optimistic)
+    state.queue.sort((a, b) => a.timeMs - b.timeMs)
+    if (state.show) {
+      const now = state.video?.currentTime ?? 0
+      // 暂停时如果按原时间生成，弹幕会停在屏幕右侧外面看不见，往回挪一点。
+      spawn(optimistic, state.video?.paused === false ? now : Math.max(0, now - 1.2))
+    }
+    if (input) input.value = ""
+    showTip("发送中……")
+
     let result = null
     try {
       result = await chrome.runtime.sendMessage({
@@ -262,24 +286,26 @@
         mode: "scroll",
       })
     } catch {
+      state.queue = state.queue.filter((item) => item.id !== tempId)
+      state.active = state.active.filter((item) => item.id !== tempId)
+      if (input && !input.value) input.value = text
       showTip("插件连接断了，刷新央视网页面再试。")
       return
     }
 
     if (result?.danmaku) {
       const item = normalize(result.danmaku)
+      item.spawned = true
+      state.queue = state.queue.filter((existing) => existing.id !== tempId)
       if (!state.queue.some((existing) => existing.id === item.id)) {
         state.queue.push(item)
         state.queue.sort((a, b) => a.timeMs - b.timeMs)
-        if (state.show) {
-          const now = state.video?.currentTime ?? 0
-          // 暂停时如果按原时间生成，弹幕会停在屏幕右侧外面看不见，往回挪一点。
-          spawn(item, state.video?.paused === false ? now : Math.max(0, now - 1.2))
-        }
       }
-      input.value = ""
       showTip("发出去了。")
     } else {
+      state.queue = state.queue.filter((item) => item.id !== tempId)
+      state.active = state.active.filter((item) => item.id !== tempId)
+      if (input && !input.value) input.value = text
       if (result?.unauthorized) state.connected = false
       showTip(result?.error ?? "发送失败。")
       paintStatus()

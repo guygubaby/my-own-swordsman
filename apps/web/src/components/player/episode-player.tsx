@@ -311,6 +311,11 @@ export function EpisodePlayer({
     if (art) pluginOf(art).emit(liveDanmu(item))
   }
 
+  /** 服务端确认后只记 id，避免轮询把同一条再放一遍。 */
+  function handleConfirmed(item: Danmaku) {
+    seenRef.current.add(item.id)
+  }
+
   function seekTo(timeMs: number) {
     const art = artRef.current
     if (!art) return
@@ -441,6 +446,7 @@ export function EpisodePlayer({
           episode={episode}
           currentTime={currentTime}
           onSent={handleSent}
+          onConfirmed={handleConfirmed}
         />
 
         <div className="flex flex-wrap items-center justify-between gap-2">

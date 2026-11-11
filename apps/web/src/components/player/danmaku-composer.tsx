@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Link } from "@tanstack/react-router"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { HTTPError } from "ky"
@@ -19,10 +19,12 @@ export function DanmakuComposer({
   episode,
   currentTime,
   onSent,
+  onConfirmed,
 }: {
   episode: number
   currentTime: number
   onSent: (item: Danmaku) => void
+  onConfirmed?: (item: Danmaku) => void
 }) {
   const { data: session } = authClient.useSession()
   const queryClient = useQueryClient()
@@ -30,6 +32,7 @@ export function DanmakuComposer({
   const [color, setColor] = useState<string>(DANMAKU_COLORS[0].value)
   const [mode, setMode] = useState<DanmakuMode>("scroll")
   const [error, setError] = useState<string | null>(null)
+  const pendingTextRef = useRef("")
   const registered = Boolean(session?.user && !session.user.isAnonymous)
 
   const mutation = useMutation({
@@ -43,12 +46,13 @@ export function DanmakuComposer({
         .post(`episodes/${episode}/danmaku`, { json: input })
         .json<{ danmaku: Danmaku }>(),
     onSuccess: (data) => {
-      setText("")
       setError(null)
-      onSent(data.danmaku)
+      onConfirmed?.(data.danmaku)
       void queryClient.invalidateQueries({ queryKey: ["danmaku", episode] })
     },
     onError: async (mutationError) => {
+      // 乐观上屏的那条已经飞出去了，撤回输入框里的内容，别让人白写。
+      setText((current) => current || pendingTextRef.current)
       if (mutationError instanceof HTTPError) {
         const body = await mutationError.response
           .json<{ error?: { message?: string } }>()
@@ -61,13 +65,24 @@ export function DanmakuComposer({
   })
 
   function send() {
-    if (!text.trim() || mutation.isPending) return
-    mutation.mutate({
-      timeMs: Math.round(currentTime * 1000),
-      text: text.trim(),
+    const value = text.trim()
+    if (!value || mutation.isPending) return
+    const timeMs = Math.round(currentTime * 1000)
+    const optimistic: Danmaku = {
+      id: `local-${crypto.randomUUID()}`,
+      episode,
+      timeMs,
+      text: value,
       color,
       mode,
-    })
+      createdAt: new Date().toISOString(),
+    }
+
+    setError(null)
+    setText("")
+    pendingTextRef.current = value
+    onSent(optimistic)
+    mutation.mutate({ timeMs, text: value, color, mode })
   }
 
   if (!registered) {
