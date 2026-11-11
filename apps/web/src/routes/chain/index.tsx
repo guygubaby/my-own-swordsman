@@ -157,6 +157,7 @@ function Composer({ onDone }: { onDone: () => void }) {
   const [title, setTitle] = useState("")
   const [body, setBody] = useState("")
   const [category, setCategory] = useState("chain")
+  const registered = Boolean(session?.user && !session.user.isAnonymous)
 
   const mutation = useMutation({
     mutationFn: (input: { title: string; body: string; category: string }) =>
@@ -169,10 +170,16 @@ function Composer({ onDone }: { onDone: () => void }) {
     },
   })
 
-  if (!session) {
+  if (!registered) {
     return (
-      <PaperCard className="px-4 py-3 text-sm text-ink-soft">
-        先领个马甲再开帖。上面那个「以游客身份进店」就是。
+      <PaperCard className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-sm text-ink-soft">
+        <span>注册 / 登录后才能开帖。</span>
+        <Link
+          to="/login"
+          className="rounded-md bg-cinnabar px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep"
+        >
+          登录 / 注册
+        </Link>
       </PaperCard>
     )
   }
@@ -221,7 +228,7 @@ function Composer({ onDone }: { onDone: () => void }) {
           <p className="text-xs text-cinnabar">发帖没成，看看是不是 API 没起。</p>
         ) : null}
         <div className="flex items-center justify-between gap-2">
-          <span className="text-[11px] text-ink-soft">以「{session.user.name}」的名义发</span>
+          <span className="text-[11px] text-ink-soft">以「{session?.user.name}」的名义发</span>
           <button
             type="submit"
             disabled={mutation.isPending || !title.trim() || !body.trim()}

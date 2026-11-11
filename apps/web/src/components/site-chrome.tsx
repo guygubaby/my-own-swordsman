@@ -6,7 +6,9 @@ import {
   MessagesSquare,
   ShoppingBag,
   TvMinimalPlay,
+  UserRound,
 } from "lucide-react"
+import { authClient } from "@/lib/auth-client"
 import { cn } from "@/lib/utils"
 
 type NavItem = {
@@ -47,6 +49,8 @@ export function Seal({ className }: { className?: string }) {
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (state) => state.location.pathname })
+  const { data: session } = authClient.useSession()
+  const registered = Boolean(session?.user && !session.user.isAnonymous)
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-paper/85 backdrop-blur-md">
@@ -80,6 +84,16 @@ export function SiteHeader() {
             )
           })}
         </nav>
+
+        <Link
+          to={registered ? "/chain" : "/login"}
+          className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink"
+        >
+          <UserRound className="size-3.5" />
+          <span className="max-w-24 truncate">
+            {registered ? session?.user.name : "登录 / 注册"}
+          </span>
+        </Link>
       </div>
     </header>
   )

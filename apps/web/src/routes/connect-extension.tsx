@@ -3,7 +3,6 @@ import { Link, createFileRoute } from "@tanstack/react-router"
 import { Check, Copy, Download, Loader2, Puzzle } from "lucide-react"
 import { api } from "@/lib/api"
 import { authClient } from "@/lib/auth-client"
-import { signInGuest } from "@/lib/guest"
 import { SectionTitle } from "@/components/site-chrome"
 
 export const Route = createFileRoute("/connect-extension")({
@@ -16,6 +15,7 @@ function ConnectExtensionPage() {
   const [token, setToken] = useState<string | null>(null)
   const [nickname, setNickname] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [needLogin, setNeedLogin] = useState(false)
   const [copied, setCopied] = useState(false)
   const startedRef = useRef(false)
   const tokenRef = useRef<string | null>(null)
@@ -27,8 +27,9 @@ function ConnectExtensionPage() {
     void (async () => {
       try {
         const session = await authClient.getSession()
-        if (!session.data?.user) {
-          await signInGuest()
+        if (!session.data?.user || session.data.user.isAnonymous) {
+          setNeedLogin(true)
+          return
         }
         const result = await api
           .post("extension/token")
@@ -75,7 +76,19 @@ function ConnectExtensionPage() {
       <div className="paper-panel mt-5 rounded-xl px-6 py-8">
         <SectionTitle kicker="浏览器插件" title="连接同福账号" />
 
-        {error ? (
+        {needLogin ? (
+          <>
+            <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+              插件要用你的账号发弹幕。先注册 / 登录，再回这个页面连接。
+            </p>
+            <Link
+              to="/login"
+              className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-cinnabar px-3.5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep"
+            >
+              去登录 / 注册
+            </Link>
+          </>
+        ) : error ? (
           <p className="mt-4 text-sm text-cinnabar">{error}</p>
         ) : token ? (
           <>

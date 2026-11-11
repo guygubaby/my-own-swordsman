@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, createFileRoute } from "@tanstack/react-router"
 import {
   ArrowRight,
@@ -12,8 +12,9 @@ import {
 import { PaperCard, SectionTitle, Seal } from "@/components/site-chrome"
 import { dailyPair } from "@/data/chain-pairs"
 import { cleanLine, episodes } from "@/data/episodes"
+import { authClient } from "@/lib/auth-client"
 import { formatTime } from "@/lib/danmaku"
-import { lastWatched } from "@/lib/watch-progress"
+import { lastWatched, syncProgress } from "@/lib/watch-progress"
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -69,8 +70,23 @@ function HomePage() {
   const [episode, setEpisode] = useState(
     () => episodes[Math.floor(Math.random() * episodes.length)],
   )
-  const [resume] = useState(() => lastWatched())
+  const { data: session } = authClient.useSession()
+  const [resume, setResume] = useState<ReturnType<typeof lastWatched>>(null)
   const pair = dailyPair()
+
+  useEffect(() => {
+    if (!session?.user || session.user.isAnonymous) {
+      setResume(null)
+      return
+    }
+    let cancelled = false
+    void syncProgress().then(() => {
+      if (!cancelled) setResume(lastWatched())
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [session])
 
   function rollEpisode() {
     setEpisode((current) => {

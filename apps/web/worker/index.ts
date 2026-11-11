@@ -6,7 +6,7 @@ import { z } from "zod"
 import { createAuth } from "./auth"
 import { createDb, type Db } from "./db"
 import type { Env } from "./env"
-import { danmaku, extensionToken, reply, thread, user } from "./schema"
+import { danmaku, extensionToken, reply, thread, user, watchProgress } from "./schema"
 
 type AppEnv = {
   Bindings: Env
@@ -41,6 +41,13 @@ app.get("/api/health", (c) => c.json({ ok: true }))
 
 async function sessionOf(c: Context<AppEnv>) {
   return c.get("auth").api.getSession({ headers: c.req.raw.headers })
+}
+
+/** 发帖、弹幕、进度、插件只认注册用户，游客会话不算。 */
+async function registeredSessionOf(c: Context<AppEnv>) {
+  const session = await sessionOf(c)
+  if (!session || session.user.isAnonymous) return null
+  return session
 }
 
 async function sha256Hex(value: string) {
@@ -135,10 +142,10 @@ app.get("/api/threads", async (c) => {
 })
 
 app.post("/api/threads", async (c) => {
-  const session = await sessionOf(c)
+  const session = await registeredSessionOf(c)
   if (!session) {
     return c.json(
-      { error: { code: "UNAUTHORIZED", message: "先以游客身份进店，再发帖。" } },
+      { error: { code: "UNAUTHORIZED", message: "注册 / 登录后才能发帖。" } },
       401,
     )
   }
@@ -237,10 +244,10 @@ app.get("/api/threads/:id", async (c) => {
 })
 
 app.post("/api/threads/:id/replies", async (c) => {
-  const session = await sessionOf(c)
+  const session = await registeredSessionOf(c)
   if (!session) {
     return c.json(
-      { error: { code: "UNAUTHORIZED", message: "先以游客身份进店，再接龙。" } },
+      { error: { code: "UNAUTHORIZED", message: "注册 / 登录后才能接龙。" } },
       401,
     )
   }
@@ -380,10 +387,10 @@ app.post("/api/episodes/:n/danmaku", async (c) => {
   if (!n) {
     return c.json({ error: { code: "BAD_REQUEST", message: "回目不对。" } }, 400)
   }
-  const session = await sessionOf(c)
+  const session = await registeredSessionOf(c)
   if (!session) {
     return c.json(
-      { error: { code: "UNAUTHORIZED", message: "先以游客身份登录，再发弹幕。" } },
+      { error: { code: "UNAUTHORIZED", message: "注册 / 登录后才能发弹幕。" } },
       401,
     )
   }
@@ -401,10 +408,10 @@ function newExtensionToken() {
 
 /** 站内（cookie 会话）签发插件令牌，明文只返回这一次。 */
 app.post("/api/extension/token", async (c) => {
-  const session = await sessionOf(c)
+  const session = await registeredSessionOf(c)
   if (!session) {
     return c.json(
-      { error: { code: "UNAUTHORIZED", message: "先以游客身份登录，再连接插件。" } },
+      { error: { code: "UNAUTHORIZED", message: "注册 / 登录后才能连接插件。" } },
       401,
     )
   }
@@ -452,7 +459,7 @@ app.delete("/api/extension/token", async (c) => {
       .where(eq(extensionToken.tokenHash, await sha256Hex(token)))
     return c.json({ ok: true })
   }
-  const session = await sessionOf(c)
+  const session = await registeredSessionOf(c)
   if (!session) {
     return c.json({ error: { code: "UNAUTHORIZED", message: "未登录。" } }, 401)
   }
@@ -474,6 +481,96 @@ app.post("/api/ext/episodes/:n/danmaku", async (c) => {
     )
   }
   return addDanmaku(c, n, userId)
+})
+
+/* ---------- 观看进度（注册用户） ---------- */
+
+const progressInput = z.object({
+  timeMs: z.number().int().min(0).max(4 * 60 * 60 * 1000),
+  durationMs: z.number().int().min(0).max(4 * 60 * 60 * 1000),
+})
+
+app.get("/api/me/progress", async (c) => {
+  const session = await registeredSessionOf(c)
+  if (!session) {
+    return c.json(
+      { error: { code: "UNAUTHORIZED", message: "注册 / 登录后才能同步进度。" } },
+      401,
+    )
+  }
+  const rows = await c
+    .get("db")
+    .select()
+    .from(watchProgress)
+    .where(eq(watchProgress.userId, session.user.id))
+
+  return c.json({
+    progress: rows.map((row) => ({
+      episode: row.episode,
+      timeMs: row.timeMs,
+      durationMs: row.durationMs,
+      updatedAt: row.updatedAt.getTime(),
+    })),
+  })
+})
+
+app.put("/api/me/progress/:n", async (c) => {
+  const n = episodeNumber(c)
+  if (!n) {
+    return c.json({ error: { code: "BAD_REQUEST", message: "回目不对。" } }, 400)
+  }
+  const session = await registeredSessionOf(c)
+  if (!session) {
+    return c.json(
+      { error: { code: "UNAUTHORIZED", message: "注册 / 登录后才能同步进度。" } },
+      401,
+    )
+  }
+  const parsed = progressInput.safeParse(await c.req.json().catch(() => null))
+  if (!parsed.success) {
+    return c.json({ error: { code: "BAD_REQUEST", message: "进度不合法。" } }, 400)
+  }
+
+  const now = new Date()
+  await c
+    .get("db")
+    .insert(watchProgress)
+    .values({
+      userId: session.user.id,
+      episode: n,
+      timeMs: parsed.data.timeMs,
+      durationMs: parsed.data.durationMs,
+      updatedAt: now,
+    })
+    .onConflictDoUpdate({
+      target: [watchProgress.userId, watchProgress.episode],
+      set: {
+        timeMs: parsed.data.timeMs,
+        durationMs: parsed.data.durationMs,
+        updatedAt: now,
+      },
+    })
+
+  return c.json({ ok: true })
+})
+
+app.delete("/api/me/progress/:n", async (c) => {
+  const n = episodeNumber(c)
+  if (!n) {
+    return c.json({ error: { code: "BAD_REQUEST", message: "回目不对。" } }, 400)
+  }
+  const session = await registeredSessionOf(c)
+  if (!session) {
+    return c.json(
+      { error: { code: "UNAUTHORIZED", message: "注册 / 登录后才能同步进度。" } },
+      401,
+    )
+  }
+  await c
+    .get("db")
+    .delete(watchProgress)
+    .where(and(eq(watchProgress.userId, session.user.id), eq(watchProgress.episode, n)))
+  return c.json({ ok: true })
 })
 
 app.notFound((c) =>

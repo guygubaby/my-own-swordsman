@@ -10,8 +10,14 @@ import artplayerPluginDanmuku, {
 } from "artplayer-plugin-danmuku"
 import { History, List } from "lucide-react"
 import { api } from "@/lib/api"
+import { authClient } from "@/lib/auth-client"
 import { formatTime, type Danmaku, type DanmakuMode } from "@/lib/danmaku"
-import { clearProgress, getProgress, saveProgress } from "@/lib/watch-progress"
+import {
+  clearProgress,
+  getProgress,
+  saveProgress,
+  type WatchProgress,
+} from "@/lib/watch-progress"
 import type { PlayableSource, VideoSource } from "@/data/video-sources"
 import { DanmakuComposer } from "./danmaku-composer"
 import { SourcePicker } from "./source-picker"
@@ -83,8 +89,23 @@ export function EpisodePlayer({
   const hlsRef = useRef<HlsJs | null>(null)
   const loadedUrlRef = useRef<string | null>(null)
   const [playerKey, setPlayerKey] = useState(0)
-  const [resume, setResume] = useState(() => getProgress(episode))
+  const { data: session } = authClient.useSession()
+  const canSync = Boolean(session?.user && !session.user.isAnonymous)
+  const canSyncRef = useRef(canSync)
+  const [resume, setResume] = useState<WatchProgress | null>(null)
+  const resumeCheckedRef = useRef(false)
   const lastSavedSlotRef = useRef(-1)
+
+  useEffect(() => {
+    canSyncRef.current = canSync
+  }, [canSync])
+
+  // 进度只给注册用户看；登录状态还没回来时先不弹续播。
+  useEffect(() => {
+    if (resumeCheckedRef.current || !session?.user) return
+    resumeCheckedRef.current = true
+    if (!session.user.isAnonymous) setResume(getProgress(episode))
+  }, [session, episode])
 
   const danmakuQuery = useQuery({
     queryKey: ["danmaku", episode],
@@ -212,13 +233,22 @@ export function EpisodePlayer({
       const slot = Math.floor(time / 5)
       if (slot !== lastSavedSlotRef.current) {
         lastSavedSlotRef.current = slot
-        saveProgress({ episode, time, duration: art.duration || 0, updatedAt: Date.now() })
+        if (canSyncRef.current) {
+          saveProgress({ episode, time, duration: art.duration || 0, updatedAt: Date.now() })
+        }
       }
     }, 500)
 
     return () => {
       window.clearInterval(timer)
-      saveProgress({ episode, time: art.currentTime, duration: art.duration || 0, updatedAt: Date.now() })
+      if (canSyncRef.current) {
+        saveProgress({
+          episode,
+          time: art.currentTime,
+          duration: art.duration || 0,
+          updatedAt: Date.now(),
+        })
+      }
       if (hlsRef.current) {
         hlsRef.current.destroy()
         hlsRef.current = null

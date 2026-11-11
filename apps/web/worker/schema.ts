@@ -1,4 +1,4 @@
-import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import { index, integer, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
 export const user = sqliteTable("user", {
   id: text("id").primaryKey(),
@@ -107,6 +107,21 @@ export const danmaku = sqliteTable(
     createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   },
   (table) => [index("danmaku_episode_time_idx").on(table.episode, table.timeMs)],
+)
+
+// 每用户每回的观看进度。客户端先写本地，再异步覆盖到这张表。
+export const watchProgress = sqliteTable(
+  "watch_progress",
+  {
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    episode: integer("episode").notNull(),
+    timeMs: integer("time_ms").notNull(),
+    durationMs: integer("duration_ms").notNull().default(0),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.userId, table.episode] })],
 )
 
 // 浏览器插件（央视网弹幕）的长期令牌。只存哈希，明文仅在签发时返回一次。

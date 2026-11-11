@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "@tanstack/react-router"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { HTTPError } from "ky"
 import { LogIn, Send } from "lucide-react"
@@ -13,7 +14,6 @@ import {
   type Danmaku,
   type DanmakuMode,
 } from "@/lib/danmaku"
-import { signInGuest } from "@/lib/guest"
 
 export function DanmakuComposer({
   episode,
@@ -24,13 +24,13 @@ export function DanmakuComposer({
   currentTime: number
   onSent: (item: Danmaku) => void
 }) {
-  const { data: session, refetch } = authClient.useSession()
+  const { data: session } = authClient.useSession()
   const queryClient = useQueryClient()
   const [text, setText] = useState("")
   const [color, setColor] = useState<string>(DANMAKU_COLORS[0].value)
   const [mode, setMode] = useState<DanmakuMode>("scroll")
   const [error, setError] = useState<string | null>(null)
-  const [loginBusy, setLoginBusy] = useState(false)
+  const registered = Boolean(session?.user && !session.user.isAnonymous)
 
   const mutation = useMutation({
     mutationFn: (input: {
@@ -60,15 +60,6 @@ export function DanmakuComposer({
     },
   })
 
-  async function login() {
-    setLoginBusy(true)
-    setError(null)
-    const result = await signInGuest()
-    if (result.error) setError(result.error.message ?? "登录失败，再试一次。")
-    await refetch()
-    setLoginBusy(false)
-  }
-
   function send() {
     if (!text.trim() || mutation.isPending) return
     mutation.mutate({
@@ -79,27 +70,25 @@ export function DanmakuComposer({
     })
   }
 
-  if (!session) {
+  if (!registered) {
     return (
       <PaperCard className="flex flex-wrap items-center justify-between gap-3 px-4 py-3.5">
         <div>
           <div className="font-heading text-sm font-bold text-ink">
-            发弹幕先领个马甲
+            发弹幕先注册
           </div>
           <p className="mt-0.5 text-[11px] text-ink-soft">
-            游客身份登录即可，不用手机号。和接龙区共用同一个马甲。
+            注册 / 登录后才能发弹幕，和接龙区共用同一个账号。
           </p>
           {error ? <p className="mt-1 text-[11px] text-cinnabar">{error}</p> : null}
         </div>
-        <button
-          type="button"
-          onClick={() => void login()}
-          disabled={loginBusy}
-          className="inline-flex items-center gap-1.5 rounded-md bg-cinnabar px-3.5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep disabled:opacity-60"
+        <Link
+          to="/login"
+          className="inline-flex items-center gap-1.5 rounded-md bg-cinnabar px-3.5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep"
         >
           <LogIn className="size-3.5" />
-          {loginBusy ? "登录中……" : "以游客身份登录"}
-        </button>
+          登录 / 注册
+        </Link>
       </PaperCard>
     )
   }
@@ -108,7 +97,7 @@ export function DanmakuComposer({
     <PaperCard className="p-4">
       <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-ink-soft">
         <span>
-          以「{session.user.name}」的名义发 · 将在 {formatTime(currentTime)} 出现
+          以「{session?.user.name}」的名义发 · 将在 {formatTime(currentTime)} 出现
         </span>
         <span>最多 40 字 · 2 秒冷却</span>
       </div>

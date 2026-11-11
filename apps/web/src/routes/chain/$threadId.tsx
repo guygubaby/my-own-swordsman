@@ -27,6 +27,7 @@ function ReplyForm({ threadId }: { threadId: string }) {
   const { data: session } = authClient.useSession()
   const queryClient = useQueryClient()
   const [body, setBody] = useState("")
+  const registered = Boolean(session?.user && !session.user.isAnonymous)
 
   const mutation = useMutation({
     mutationFn: (content: string) =>
@@ -40,10 +41,16 @@ function ReplyForm({ threadId }: { threadId: string }) {
     },
   })
 
-  if (!session) {
+  if (!registered) {
     return (
-      <PaperCard className="px-4 py-3 text-sm text-ink-soft">
-        想接龙，先在上面领个马甲。游客身份就行，不用手机号。
+      <PaperCard className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-sm text-ink-soft">
+        <span>注册 / 登录后才能接龙。</span>
+        <Link
+          to="/login"
+          className="rounded-md bg-cinnabar px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep"
+        >
+          登录 / 注册
+        </Link>
       </PaperCard>
     )
   }
@@ -69,7 +76,7 @@ function ReplyForm({ threadId }: { threadId: string }) {
           <p className="text-xs text-cinnabar">没接上，看看 API 起来没有。</p>
         ) : null}
         <div className="flex items-center justify-between">
-          <span className="text-[11px] text-ink-soft">以「{session.user.name}」的名义接</span>
+          <span className="text-[11px] text-ink-soft">以「{session?.user.name}」的名义接</span>
           <button
             type="submit"
             disabled={mutation.isPending || !body.trim()}

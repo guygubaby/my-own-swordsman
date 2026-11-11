@@ -1,8 +1,9 @@
 import { useState } from "react"
+import { Link } from "@tanstack/react-router"
 import { LogOut, Pencil, UserRound } from "lucide-react"
 import { PaperCard } from "@/components/site-chrome"
 import { authClient } from "@/lib/auth-client"
-import { signInGuest } from "@/lib/guest"
+import { clearAllProgress } from "@/lib/watch-progress"
 
 export function AuthBar() {
   const { data: session, isPending, refetch } = authClient.useSession()
@@ -11,21 +12,7 @@ export function AuthBar() {
   const [name, setName] = useState("")
   const [error, setError] = useState<string | null>(null)
 
-  async function signIn() {
-    setBusy(true)
-    setError(null)
-    try {
-      const result = await signInGuest()
-      if (result.error) {
-        setError(result.error.message ?? "进店失败，再试一次。")
-      }
-      await refetch()
-    } catch {
-      setError("进店失败，看看 API 起来没有。")
-    } finally {
-      setBusy(false)
-    }
-  }
+  const registered = Boolean(session?.user && !session.user.isAnonymous)
 
   async function saveName() {
     const trimmed = name.trim()
@@ -46,6 +33,7 @@ export function AuthBar() {
     setBusy(true)
     try {
       await authClient.signOut()
+      clearAllProgress()
       await refetch()
     } finally {
       setBusy(false)
@@ -58,24 +46,24 @@ export function AuthBar() {
     )
   }
 
-  if (!session) {
+  if (!registered) {
     return (
       <PaperCard className="flex flex-wrap items-center justify-between gap-3 px-4 py-3.5">
         <div>
-          <div className="font-heading text-sm font-bold text-ink">先领个马甲</div>
+          <div className="font-heading text-sm font-bold text-ink">先注册，再进店</div>
           <p className="mt-0.5 text-[11px] leading-relaxed text-ink-soft">
-            游客身份进店，不用手机号。发帖、接龙都认这个马甲。
+            {session?.user?.isAnonymous
+              ? "你现在的游客马甲不能发帖、发弹幕，注册一个正式账号就都能用了。"
+              : "发帖、接龙、发弹幕、同步观看进度，都需要注册账号。"}
           </p>
           {error ? <p className="mt-1 text-[11px] text-cinnabar">{error}</p> : null}
         </div>
-        <button
-          type="button"
-          onClick={() => void signIn()}
-          disabled={busy}
-          className="rounded-md bg-cinnabar px-3.5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep disabled:opacity-60"
+        <Link
+          to="/login"
+          className="rounded-md bg-cinnabar px-3.5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-cinnabar-deep"
         >
-          {busy ? "进店中……" : "以游客身份进店"}
-        </button>
+          登录 / 注册
+        </Link>
       </PaperCard>
     )
   }
@@ -87,8 +75,8 @@ export function AuthBar() {
           <UserRound className="size-4" />
         </span>
         <div className="min-w-0">
-          <div className="truncate text-sm font-medium text-ink">{session.user.name}</div>
-          <div className="text-[10px] tracking-wider text-ink-soft">当前马甲</div>
+          <div className="truncate text-sm font-medium text-ink">{session?.user.name}</div>
+          <div className="text-[10px] tracking-wider text-ink-soft">当前账号</div>
         </div>
       </div>
 
@@ -99,7 +87,7 @@ export function AuthBar() {
             onChange={(event) => setName(event.target.value)}
             maxLength={20}
             className="h-8 w-32 rounded-md border border-input bg-card px-2.5 text-sm outline-none focus:border-cinnabar"
-            aria-label="新马甲名"
+            aria-label="新昵称"
           />
           <button
             type="button"
@@ -122,7 +110,7 @@ export function AuthBar() {
           <button
             type="button"
             onClick={() => {
-              setName(session.user.name)
+              setName(session?.user.name ?? "")
               setEditing(true)
             }}
             className="inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-xs text-ink-soft hover:bg-ink/5 hover:text-ink"
